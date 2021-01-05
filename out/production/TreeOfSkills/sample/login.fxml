@@ -17,7 +17,7 @@
    <children>
       <BorderPane prefHeight="400.0" prefWidth="520.0">
          <left>
-            <AnchorPane prefHeight="405.0" prefWidth="230.0" style="-fx-background-color: red;" BorderPane.alignment="CENTER">
+            <AnchorPane prefHeight="405.0" prefWidth="230.0" style="-fx-background-color: #ce0033;" BorderPane.alignment="CENTER">
                <children>
                   <ImageView fx:id="imgSimplonView" fitHeight="182.0" fitWidth="241.0" layoutX="12.0" layoutY="7.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -42,7 +42,7 @@
                      </font>
                   </Label>
                   <PasswordField fx:id="passwordField" layoutX="112.0" layoutY="258.0" prefHeight="26.0" prefWidth="173.0" promptText="Password" />
-                  <Button layoutX="40.0" layoutY="318.0" mnemonicParsing="false" onAction="#LoginButtonOnAction" prefHeight="25.0" prefWidth="251.0" style="-fx-background-color: red;" text="Login" textFill="WHITE">
+                  <Button layoutX="40.0" layoutY="318.0" mnemonicParsing="false" onAction="#LoginButtonOnAction" prefHeight="25.0" prefWidth="251.0" style="-fx-background-color: #ce0033;" text="Login" textFill="WHITE">
                      <font>
                         <Font name="Barrio Regular" size="13.0" />
                      </font>
@@ -52,7 +52,7 @@
                         <Image url="@../../img/code.png" />
                      </image>
                   </ImageView>
-                  <Button fx:id="cancelButton" layoutX="39.0" layoutY="350.0" mnemonicParsing="false" onAction="#cancelButtonOnAction" prefHeight="25.0" prefWidth="251.0" style="-fx-background-color: red;" text="Cancel" textFill="#fffdfd">
+                  <Button fx:id="cancelButton" layoutX="39.0" layoutY="350.0" mnemonicParsing="false" onAction="#cancelButtonOnAction" prefHeight="25.0" prefWidth="251.0" style="-fx-background-color: #ce0033;" text="Cancel" textFill="#fffdfd">
                      <font>
                         <Font name="Barrio Regular" size="13.0" />
                      </font>
