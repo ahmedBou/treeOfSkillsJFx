@@ -68,8 +68,7 @@ public class LoginController implements Initializable {
     public void validateLogin(){
         DbConnect connectNow = new DbConnect();
         Connection connectDb = connectNow.getConnect();
-
-        String verifyLogin = "SELECT * FROM student_account WHERE username = '"
+        String verifyLogin = "SELECT count(1) FROM apprenant WHERE surnom = '"
                 + usernameField.getText() +"'And password= '"+passwordField.getText()+"'";
 
         try {
@@ -77,9 +76,9 @@ public class LoginController implements Initializable {
             ResultSet queryResult = statement.executeQuery(verifyLogin);
             while(queryResult.next()){
                 if(queryResult.getInt(1)==1){
-//                    loginMessage.setText("success");
+                    loginMessage.setText("success");
                     createAccountForm();
-                    
+
                 }else{
                     loginMessage.setText("invalid mot de passe ou surnom, reessaye");
                 }

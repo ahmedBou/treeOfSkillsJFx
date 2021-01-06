@@ -29,7 +29,10 @@ public class RegisterController implements Initializable {
 
     @FXML
     private TextField username;
-
+    @FXML
+    private TextField email;
+    @FXML
+    private TextField tel;
     @FXML
     private PasswordField password;
 
@@ -59,38 +62,62 @@ public class RegisterController implements Initializable {
     }
 
 
-
-    public void cancelButtonOnAction(){
+    public void cancelButtonOnAction() {
         Stage stage = (Stage) cancelBtn.getScene().getWindow();
         stage.close();
         Platform.exit();
     }
 
-    public void registerOnAction(){
+    public void registerOnAction() {
         System.out.println("hello");
-        if(!firstName.getText().isBlank() &&
+        if (!firstName.getText().isBlank() &&
                 !lastname.getText().isBlank() &&
-                !username.getText().isBlank()&&
-                !password.getText().isBlank()&&
-                !confirmPass.getText().isBlank())   {
+                !username.getText().isBlank() &&
+                !password.getText().isBlank() &&
+                !confirmPass.getText().isBlank()) {
             System.out.println("success");
-        }else{
+        } else {
             registerMsg.setText("veuiller remplir tout les champs!!!");
         }
     }
 
-    public void registerOnAction(ActionEvent event){
-        registerSuccess.setText("vous etes bien enregister!!");
-        registerValidation();
-    }
-
-    public void registerValidation(){
-        if(password.getText().equals(confirmPass.getText())){
-            matchPass.setText("le mot de passe se correspond");
-        }else{
+    public void registerOnAction(ActionEvent event) {
+        if (password.getText().equals(confirmPass.getText())) {
+            registerValidation();
+        } else {
             matchPass.setText("le mot de passe ne se correspond pas!!");
 
         }
+
+    }
+    public void registerValidation(){
+        DbConnect connectNow = new DbConnect();
+        Connection connectDb = connectNow.getConnect();
+        String firstname = firstName.getText();
+        String lastName = lastname.getText();
+        String userName = username.getText();
+        String emailAdd = email.getText();
+        String tels = tel.getText();
+        String passwords = password.getText();
+        int idApp = 4;
+        String insertField = "INSERT INTO apprenant(idApp, nomApp, prenomApp, surnom,emailApp, tel, password) VALUES ('" ;
+        String insertValues= idApp +"','" +firstname +"','"+ lastName +"','"+ userName +"','"+ emailAdd +"','"+ tels +"','"+ passwords + "')";
+        String insertToRegister = insertField + insertValues;
+
+
+        try {
+            Statement statement = connectDb.createStatement();
+            statement.executeUpdate(insertToRegister);
+            registerSuccess.setText("vous etes bien enregister!!");
+
+
+        }catch (Exception e){
+            e.printStackTrace();
+            e.getCause();
+        }
+
+
     }
 
 }
+
