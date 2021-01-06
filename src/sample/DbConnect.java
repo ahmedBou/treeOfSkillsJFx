@@ -6,7 +6,7 @@ public class DbConnect {
     public Connection getConnect(){
         String dbUser = "root";
         String dbPass = "root";
-        String url = "jdbc:mysql://localhost:3306/treeofskillsdb?autoReconnect=true&useSSL=false";
+        String url = "jdbc:mysql://localhost:8080/treeofskillsdb?autoReconnect=true&useSSL=false";
 
         try{
             Class.forName("com.mysql.cj.jdbc.Driver");
