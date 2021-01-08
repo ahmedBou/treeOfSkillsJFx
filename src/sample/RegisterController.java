@@ -80,6 +80,10 @@ public class RegisterController implements Initializable {
             registerMsg.setText("veuiller remplir tout les champs!!!");
         }
     }
+    public void remplirChamps(){
+        //connectio & rql
+
+    }
 
     public void registerOnAction(ActionEvent event) {
         if (password.getText().equals(confirmPass.getText())) {
@@ -99,6 +103,7 @@ public class RegisterController implements Initializable {
         String emailAdd = email.getText();
         String tels = tel.getText();
         String passwords = password.getText();
+
         int idApp = 4;
         String insertField = "INSERT INTO apprenant(idApp, nomApp, prenomApp, surnom,emailApp, tel, password) VALUES ('" ;
         String insertValues= idApp +"','" +firstname +"','"+ lastName +"','"+ userName +"','"+ emailAdd +"','"+ tels +"','"+ passwords + "')";
