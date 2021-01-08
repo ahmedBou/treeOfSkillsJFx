@@ -1,10 +1,8 @@
 /*==============================================================*/
 /* Nom de SGBD :  MySQL 5.0                                     */
-/* Date de création :  1/6/2021 3:59:31 PM                      */
+/* Date de création :  1/8/2021 2:55:19 PM                      */
 /*==============================================================*/
 
-
-drop trigger tib_promotion;
 
 drop table if exists Apprenant;
 
@@ -12,26 +10,26 @@ drop table if exists Competence;
 
 drop table if exists Niveau;
 
+drop table if exists PromoApprenant;
+
 drop table if exists Promotion;
 
 drop table if exists Refereniel;
 
 drop table if exists Staff;
 
-drop table if exists lier;
-
 /*==============================================================*/
 /* Table : Apprenant                                            */
 /*==============================================================*/
 create table Apprenant
 (
-   idApp                int not null,
-   nomApp               varchar(254),
-   prenomApp            varchar(254),
-   emailApp             varchar(254),
-   telApp               varchar(254),
-   villeApp             varchar(254),
-   primary key (idApp)
+   idApprenant          int not null,
+   nomApprenant         varchar(254),
+   prenomApprenant      varchar(254),
+   emailApprenant       varchar(254),
+   telApprenant         varchar(254),
+   villeApprenant       varchar(254),
+   primary key (idApprenant)
 );
 
 /*==============================================================*/
@@ -39,10 +37,12 @@ create table Apprenant
 /*==============================================================*/
 create table Competence
 (
-   idRef                int not null,
+   idRef                int,
    idComp               int not null,
+   idNiveau             int,
    titreComp            varchar(254),
-   primary key (idRef, idComp)
+   status               bool,
+   primary key (idComp)
 );
 
 /*==============================================================*/
@@ -56,16 +56,23 @@ create table Niveau
 );
 
 /*==============================================================*/
+/* Table : PromoApprenant                                       */
+/*==============================================================*/
+create table PromoApprenant
+(
+   id_Promo             int,
+   idApprenant          int
+);
+
+/*==============================================================*/
 /* Table : Promotion                                            */
 /*==============================================================*/
 create table Promotion
 (
-   idPromo              int not null,
-   idStaff              int not null,
-   idApp                int not null,
-   titrePromo           varchar(254),
-   anneePromo           int,
-   primary key (idPromo)
+   id_Promo             int not null,
+   titre_Promo          varchar(254),
+   annee_Promo          int,
+   primary key (id_Promo)
 );
 
 /*==============================================================*/
@@ -73,8 +80,8 @@ create table Promotion
 /*==============================================================*/
 create table Refereniel
 (
+   id_Promo             int,
    idRef                int not null,
-   idPromo              int not null,
    titreRef             varchar(254),
    primary key (idRef)
 );
@@ -84,6 +91,7 @@ create table Refereniel
 /*==============================================================*/
 create table Staff
 (
+   id_Promo             int,
    idStaff              int not null,
    nomStaff             varchar(254),
    prenomStaff          varchar(254),
@@ -92,38 +100,21 @@ create table Staff
    primary key (idStaff)
 );
 
-/*==============================================================*/
-/* Table : lier                                                 */
-/*==============================================================*/
-create table lier
-(
-   idRef                int not null,
-   idComp               int not null,
-   idNiveau             int not null,
-   primary key (idRef, idComp, idNiveau)
-);
-
-alter table Competence add constraint FK_possede foreign key (idRef)
+alter table Competence add constraint FK_Association_4 foreign key (idRef)
       references Refereniel (idRef) on delete restrict on update restrict;
 
-alter table Promotion add constraint FK_Contient2 foreign key (idApp)
-      references Apprenant (idApp) on delete restrict on update restrict;
-
-alter table Promotion add constraint FK_contient1 foreign key (idStaff)
-      references Staff (idStaff) on delete restrict on update restrict;
-
-alter table Refereniel add constraint FK_contient3 foreign key (idPromo)
-      references Promotion (idPromo) on delete restrict on update restrict;
-
-alter table lier add constraint FK_lier foreign key (idRef, idComp)
-      references Competence (idRef, idComp) on delete restrict on update restrict;
-
-alter table lier add constraint FK_lier foreign key (idNiveau)
+alter table Competence add constraint FK_Association_5 foreign key (idNiveau)
       references Niveau (idNiveau) on delete restrict on update restrict;
 
+alter table PromoApprenant add constraint FK_Association_1 foreign key (idApprenant)
+      references Apprenant (idApprenant) on delete restrict on update restrict;
 
-create trigger tib_promotion before insert
-on Promotion for each row
-begin
-end;
+alter table PromoApprenant add constraint FK_PromoApprenant foreign key (id_Promo)
+      references Promotion (id_Promo) on delete restrict on update restrict;
+
+alter table Refereniel add constraint FK_Association_3 foreign key (id_Promo)
+      references Promotion (id_Promo) on delete restrict on update restrict;
+
+alter table Staff add constraint FK_Association_2 foreign key (id_Promo)
+      references Promotion (id_Promo) on delete restrict on update restrict;
 
