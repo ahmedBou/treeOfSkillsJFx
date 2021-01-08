@@ -8,13 +8,12 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.PasswordField;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
+import javafx.scene.control.ComboBox;
 
 import java.io.File;
 import java.net.URL;
@@ -56,7 +55,7 @@ public class RegisterController implements Initializable {
     @FXML
     private Label matchPass;
 
-    ObservableList<String> items = FXCollections.observableArrayList("1er annees","2eme annees");
+    ObservableList<String> options = FXCollections.observableArrayList();
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -85,11 +84,37 @@ public class RegisterController implements Initializable {
         }
     }
     public void promoChoice(){
+        System.out.println("hello");
+        ComboBox combo = new ComboBox();
+
+
+//        for(int i = 0 ; i<options.size();i++){
+//
+//        }
+
         DbConnect connectNow = new DbConnect();
         Connection connectDb = connectNow.getConnect();
-//        comboBox.getItems().add("Choice 1");
-//        comboBox.getItems().add("Choice 2");
-//        comboBox.getItems().add("Choice 3");
+        String queryCombo = "select titrePromo from promotion";
+        try {
+            Statement statement = connectDb.createStatement();
+            ResultSet queryResult = statement.executeQuery(queryCombo);
+            while(queryResult.next()){
+                options.add(queryResult.getString("titrePromo"));
+                System.out.println(options);
+//                options.add(queryResult.getString("titrePromo"));
+//                System.out.println(options);
+
+            }
+            statement.close();
+            queryResult.close();
+            combo.setItems(options);
+
+        }catch (Exception e){
+            e.printStackTrace();
+            e.getCause();
+        }
+
+
 
     }
 
@@ -103,16 +128,17 @@ public class RegisterController implements Initializable {
 
     }
     public void registerValidation(){
+        promoChoice();
         DbConnect connectNow = new DbConnect();
         Connection connectDb = connectNow.getConnect();
         String firstname = firstName.getText();
         String lastName = lastname.getText();
         String userName = username.getText();
         String emailAdd = email.getText();
-        String tels = tel.getText();
+        int tels = Integer.parseInt(tel.getText());
         String passwords = password.getText();
 
-        int idApp = 4;
+        int idApp = 7;
         String insertField = "INSERT INTO apprenant(idApp, nomApp, prenomApp, surnom,emailApp, tel, password) VALUES ('" ;
         String insertValues= idApp +"','" +firstname +"','"+ lastName +"','"+ userName +"','"+ emailAdd +"','"+ tels +"','"+ passwords + "')";
         String insertToRegister = insertField + insertValues;

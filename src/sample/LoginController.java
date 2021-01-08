@@ -1,5 +1,8 @@
 package sample;
 import java.sql.*;
+
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -17,6 +20,8 @@ import javafx.stage.StageStyle;
 import java.io.File;
 import java.net.URL;
 import java.util.ResourceBundle;
+
+
 
 public class LoginController implements Initializable {
 
@@ -38,6 +43,7 @@ public class LoginController implements Initializable {
 
     @FXML
     private PasswordField passwordField;
+
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle){
@@ -68,14 +74,20 @@ public class LoginController implements Initializable {
     public void validateLogin(){
         DbConnect connectNow = new DbConnect();
         Connection connectDb = connectNow.getConnect();
-        String verifyLogin = "SELECT count(1) FROM apprenant WHERE surnom = '"
-                + usernameField.getText() +"'And password= '"+passwordField.getText()+"'";
+        String verifyLogin = "SELECT * FROM apprenant WHERE surnom = '"
+                + usernameField.getText() +"' And password= '"+passwordField.getText()+"'";
+        System.out.println(verifyLogin);
 
         try {
             Statement statement = connectDb.createStatement();
             ResultSet queryResult = statement.executeQuery(verifyLogin);
             while(queryResult.next()){
-                if(queryResult.getInt(1)==1){
+                System.out.println(usernameField.getText().length());
+                System.out.println(queryResult.getString("surnom").length());
+                System.out.println(usernameField.getText().equals(queryResult.getString("surnom")));
+
+                if(queryResult.getString("surnom").equals(usernameField.getText())){
+
                     loginMessage.setText("success");
                     createAccountForm();
 
@@ -94,6 +106,7 @@ public class LoginController implements Initializable {
 
     public void createAccountForm(){
         try{
+
         Parent root = FXMLLoader.load(getClass().getResource("register.fxml"));
         Stage registerStage = new Stage();
         registerStage.initStyle(StageStyle.UNDECORATED);
