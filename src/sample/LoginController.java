@@ -1,7 +1,10 @@
 package sample;
 import java.sql.*;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
@@ -9,6 +12,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
 import java.io.File;
 import java.net.URL;
@@ -64,8 +68,7 @@ public class LoginController implements Initializable {
     public void validateLogin(){
         DbConnect connectNow = new DbConnect();
         Connection connectDb = connectNow.getConnect();
-
-        String verifyLogin = "SELECT count(1) FROM student_account WHERE username = '"
+        String verifyLogin = "SELECT count(1) FROM apprenant WHERE surnom = '"
                 + usernameField.getText() +"'And password= '"+passwordField.getText()+"'";
 
         try {
@@ -74,6 +77,8 @@ public class LoginController implements Initializable {
             while(queryResult.next()){
                 if(queryResult.getInt(1)==1){
                     loginMessage.setText("success");
+                    createAccountForm();
+
                 }else{
                     loginMessage.setText("invalid mot de passe ou surnom, reessaye");
                 }
@@ -86,5 +91,20 @@ public class LoginController implements Initializable {
             e.getCause();
         }
     }
+
+    public void createAccountForm(){
+        try{
+        Parent root = FXMLLoader.load(getClass().getResource("register.fxml"));
+        Stage registerStage = new Stage();
+        registerStage.initStyle(StageStyle.UNDECORATED);
+        registerStage.setScene(new Scene(root, 520, 695));
+        registerStage.show();
+
+        }catch (Exception e){
+            e.printStackTrace();
+            e.getCause();
+        }
+    }
+
 
 }
