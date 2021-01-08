@@ -3,6 +3,8 @@ package sample;
 import java.sql.*;
 
 import javafx.application.Platform;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -54,6 +56,8 @@ public class RegisterController implements Initializable {
     @FXML
     private Label matchPass;
 
+    ObservableList<String> items = FXCollections.observableArrayList("1er annees","2eme annees");
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         File imgPathSimplon = new File("img/simplo.png");
@@ -80,8 +84,12 @@ public class RegisterController implements Initializable {
             registerMsg.setText("veuiller remplir tout les champs!!!");
         }
     }
-    public void remplirChamps(){
-        //connectio & rql
+    public void promoChoice(){
+        DbConnect connectNow = new DbConnect();
+        Connection connectDb = connectNow.getConnect();
+//        comboBox.getItems().add("Choice 1");
+//        comboBox.getItems().add("Choice 2");
+//        comboBox.getItems().add("Choice 3");
 
     }
 
