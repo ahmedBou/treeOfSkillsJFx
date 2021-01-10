@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.StudentController">
+   <top>
+      <AnchorPane prefHeight="72.0" prefWidth="600.0" BorderPane.alignment="CENTER" />
+   </top>
+   <center>
+      <AnchorPane prefHeight="328.0" prefWidth="429.0" style="-fx-background-color: gray;" BorderPane.alignment="CENTER">
+         <children>
+            <Label layoutX="231.0" layoutY="14.0" prefHeight="18.0" prefWidth="119.0" text="Mes Competance" />
+            <Label fx:id="comp1" layoutX="42.0" layoutY="57.0" prefHeight="18.0" prefWidth="119.0" text="Competance1" />
+            <Label fx:id="comp2" layoutX="373.0" layoutY="52.0" prefHeight="18.0" prefWidth="119.0" text="Competance2" />
+            <Label fx:id="comp3" layoutX="39.0" layoutY="132.0" prefHeight="18.0" prefWidth="119.0" text="Competance2" />
+            <Label fx:id="comp4" layoutX="373.0" layoutY="127.0" prefHeight="18.0" prefWidth="119.0" text="Competance2" />
+            <Label fx:id="comp6" layoutX="373.0" layoutY="198.0" prefHeight="18.0" prefWidth="119.0" text="Competance2" />
+            <Label fx:id="comp5" layoutX="39.0" layoutY="203.0" prefHeight="18.0" prefWidth="119.0" text="Competance2" />
+            <HBox fx:id="comp2Container" layoutX="373.0" layoutY="75.0" prefHeight="25.0" prefWidth="178.0" />
+            <HBox fx:id="comp1Container" layoutX="39.0" layoutY="80.0" onMouseClicked="#loadCompetancesAndLevels" prefHeight="25.0" prefWidth="178.0" />
+            <HBox fx:id="comp3Container" layoutX="39.0" layoutY="161.0" prefHeight="25.0" prefWidth="178.0" />
+            <HBox fx:id="comp4Container" layoutX="373.0" layoutY="156.0" prefHeight="25.0" prefWidth="178.0" />
+            <HBox fx:id="comp6Container" layoutX="373.0" layoutY="225.0" prefHeight="25.0" prefWidth="178.0" />
+            <HBox fx:id="comp5Container" layoutX="39.0" layoutY="230.0" prefHeight="25.0" prefWidth="178.0" />
+         </children>
+      </AnchorPane>
+   </center>
+</BorderPane>

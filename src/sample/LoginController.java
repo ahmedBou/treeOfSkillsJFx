@@ -1,8 +1,6 @@
 package sample;
 import java.sql.*;
 
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -14,6 +12,8 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
@@ -24,7 +24,7 @@ import java.util.ResourceBundle;
 
 
 public class LoginController implements Initializable {
-
+    static  int session = 0;
     @FXML
     private Button cancelButton;
 
@@ -75,7 +75,7 @@ public class LoginController implements Initializable {
         DbConnect connectNow = new DbConnect();
         Connection connectDb = connectNow.getConnect();
         String verifyLogin = "SELECT * FROM apprenant WHERE surnom = '"
-                + usernameField.getText() +"' And password= '"+passwordField.getText()+"'";
+                + usernameField.getText() +"' And password= '"+passwordField.getText()+"'AND isStaff = 1";
         System.out.println(verifyLogin);
 
         try {
@@ -90,6 +90,7 @@ public class LoginController implements Initializable {
 
                     loginMessage.setText("success");
                     createAccountForm();
+                    remplirListeApprenant();
 
                 }else{
                     loginMessage.setText("invalid mot de passe ou surnom, reessaye");
@@ -107,10 +108,10 @@ public class LoginController implements Initializable {
     public void createAccountForm(){
         try{
 
-        Parent root = FXMLLoader.load(getClass().getResource("register.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("student.fxml"));
         Stage registerStage = new Stage();
         registerStage.initStyle(StageStyle.UNDECORATED);
-        registerStage.setScene(new Scene(root, 520, 695));
+        registerStage.setScene(new Scene(root, 520, 500));
         registerStage.show();
 
         }catch (Exception e){
@@ -119,5 +120,33 @@ public class LoginController implements Initializable {
         }
     }
 
+    public void remplirListeApprenant() {
+        VBox VbApp = new VBox();
+        VbApp.setMaxSize(220,70);
+
+        HBox HbApp = new HBox();
+        HbApp.setMaxSize(220,70);
+
+
+        DbConnect connectNow = new DbConnect();
+        Connection connectDb = connectNow.getConnect();
+        String recupApp = "select a.nomApp from apprenant a , promoapprenant p , staff s where s.idPromo = p.idPromo AND s.idStaff ='" +session+ "' AND a.idApp = p.idApp";
+
+        try {
+            Statement statement = connectDb.createStatement();
+            ResultSet queryResult = statement.executeQuery(recupApp);
+            while(queryResult.next()){
+                // NomCompApp.setText(queryResult.getInt(2)+" "+queryResult.getInt(3));
+
+                // HbApp.getChildren().add(NomCompApp);
+                String x = queryResult.getString(1);
+                System.out.println(x);
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+            e.getCause();
+        }
+
+    }
 
 }
