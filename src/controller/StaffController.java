@@ -1,14 +1,17 @@
 package controller;
 
 
+import db.DbConnect;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-import db.DbConnect;
 
 import java.net.URL;
 import java.sql.Connection;
@@ -29,18 +32,19 @@ public class StaffController implements Initializable {
     @FXML
     public  Label NomCompApp;
     @FXML
-    public  Label app;
+    public Button app;
 
     @FXML
     public  HBox HbApp;
     @FXML
     public  VBox VbApp;
     @FXML
-    public  AnchorPane AnchorComp;
+    public  AnchorPane AnchorListes;
     @FXML
     public    Label promoLabel;
     @FXML
     public    Label refLabel;
+
 
 
     @Override
@@ -53,26 +57,52 @@ public class StaffController implements Initializable {
     }
 
     public void remplirListeApprenant() {
-        int i = 50;
+        int i = 0;
         DbConnect connectNow = new DbConnect();
         Connection connectDb = connectNow.getConnect();
-        String recupApp = "select a.nomApprenant ,a.prenomApprenant from apprenant a , promoapprenant p , staff s where s.id_Promo = p.id_Promo AND s.idStaff ='"+session+"' AND a.idApprenant = p.idApprenant";
+        String recupApp = "select a.nomApprenant ,a.prenomApprenant ,a.idApprenant from apprenant a , promoapprenant p , staff s where s.id_Promo = p.id_Promo AND s.idStaff ='"+session+"' AND a.idApprenant = p.idApprenant";
         System.out.println(recupApp);
         try {
             Statement statement = connectDb.createStatement();
             ResultSet queryResult = statement.executeQuery(recupApp);
 
             while (queryResult.next()) {
-                Label NomLabel = new Label();
-                NomLabel.setMaxSize(300,100);
-                NomLabel.setId("NomCompApp");
-                //System.out.println(queryResult.getString(1));
-                app.setText(queryResult.getString(1)+" "+queryResult.getString(2));
-                //System.out.println(queryResult.getString("nomApprenant"));
+                i+=100;
+                Button app1 = new Button();
 
+
+                app1.setMinWidth(300);
+                app1.setMinHeight(100);
+
+
+                app1.setId(""+queryResult.getInt(3));
+                System.out.println(queryResult.getString(1));
+                app1.setText(queryResult.getString(1)+" "+queryResult.getString(2));
+
+
+                app1.setLayoutY(i);
+                app1.setLayoutX(120);
+                AnchorListes.getChildren().add(app1);
+
+
+                app1.setOnAction(
+                        new EventHandler<ActionEvent>() {
+                            @Override
+                            public void handle(ActionEvent event){
+                                System.out.println(Integer.parseInt(app1.getId()));
+                                int idApp = Integer.parseInt(app1.getId());
+                                DbConnect connectNow = new DbConnect();
+                                Connection connectDb = connectNow.getConnect();
+                                String recupApp = "select a.nomApprenant ,a.prenomApprenant ,a.idApprenant from apprenant a , promoapprenant p , staff s where s.id_Promo = p.id_Promo AND s.idStaff ='"+session+"' AND a.idApprenant = p.idApprenant";
+                                System.out.println(recupApp);
+
+                                }
+                            }
+                );
 
                 i += 30;
             }
+
 
 
         } catch (Exception e) {
@@ -129,3 +159,5 @@ public class StaffController implements Initializable {
         }
     }
 }
+
+//select a.nomApprenant , s.nomStaff , r.titreRef,pr.titre_Promo from apprenant a , promoapprenant p ,promotion pr , staff s ,refereniel r where a.idApprenant = p.idApprenant AND P.id_Promo = r.id_Promo And s.idStaff = 1 and P.id_Promo =s.id_Promo AND pr.id_Promo = p.id_Promo
