@@ -1,16 +1,23 @@
-package sample;
+package controller;
 
+import db.DbConnect;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.ProgressBar;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
-import sample.DbConnect;
 
+import java.io.File;
+import java.net.URL;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.util.ResourceBundle;
 
-public class StudentController  {
+public class StudentController implements Initializable {
     // Competances Labels
     @FXML
     private Label comp1;
@@ -24,6 +31,16 @@ public class StudentController  {
     private Label comp5;
     @FXML
     private Label comp6;
+    @FXML
+    ImageView imageProfile;
+
+    @FXML
+    private ProgressBar niv1;
+    @FXML
+    private ProgressBar niv2;
+    @FXML
+    private ProgressBar niv3;
+
 
     // Buttons Levels Containers
     @FXML
@@ -31,15 +48,21 @@ public class StudentController  {
 
     // load competences and levels automatically
     @FXML
-    public void initialize() {
+    public void initialize(URL url, ResourceBundle resourceBundle) {
         this.loadCompetancesAndLevels();
         System.out.println("called");
+        File imgPathSimplon = new File("img/profile.png");
+        Image imgPath = new Image(imgPathSimplon.toURI().toString());
+
+        imageProfile.setImage(imgPath);
     }
 
     // For loading competences and levels
     public void loadCompetancesAndLevels(){
         DbConnect dbConnect = new DbConnect();
         Connection connectDb = dbConnect.getConnect();
+
+
         String query = "SELECT * FROM competence\n" +
                 "LEFT JOIN niveau ON niveau.competenceID = competence.idComp \n" +
                 "UNION\n" +
@@ -53,6 +76,9 @@ public class StudentController  {
                 String competanceID = queryResult.getString("competenceID");
                 String compID = queryResult.getString("idComp");
                 String titreNiveau = queryResult.getString("titreNiveau");
+
+                comp1.setText(queryResult.getString("titreComp"));
+                createLevel(compID, competanceID, titreNiveau, comp1Container);
 
                 // checking all competences
                 switch (compID){
@@ -93,7 +119,7 @@ public class StudentController  {
                         break;
                     }
                     default:
-                        System.out.println("Unkown cmpetance");
+                        System.out.println("Unknown competence");
                 }
             }
             statement.close();

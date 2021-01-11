@@ -1,4 +1,4 @@
-package sample;
+package controller;
 import java.sql.*;
 
 import javafx.fxml.FXML;
@@ -16,6 +16,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import db.DbConnect;
 
 import java.io.File;
 import java.net.URL;
@@ -57,11 +58,12 @@ public class LoginController implements Initializable {
     }
 
     public void LoginButtonOnAction(){
-        if(!usernameField.getText().isBlank() && !passwordField.getText().isBlank()){
+        if(!usernameField.getText().isBlank() &&
+                !passwordField.getText().isBlank()){
             validateLogin();
 
         }else{
-            loginMessage.setText("entrer votre surnom et votre mot de passe!");
+            loginMessage.setText("Veuiller entrer votre surnom et votre mot de passe!");
 
         }
     }
@@ -69,6 +71,20 @@ public class LoginController implements Initializable {
     public void cancelButtonOnAction(){
         Stage stage = (Stage) cancelButton.getScene().getWindow();
         stage.close();
+    }
+    public void toRegisterForm(){
+        try{
+
+            Parent root = FXMLLoader.load(getClass().getResource("/view/register.fxml"));
+            Stage registerStage = new Stage();
+            registerStage.initStyle(StageStyle.UNDECORATED);
+            registerStage.setScene(new Scene(root, 520, 550));
+            registerStage.show();
+
+        }catch (Exception e){
+            e.printStackTrace();
+            e.getCause();
+        }
     }
 
     public void validateLogin(){
@@ -89,7 +105,7 @@ public class LoginController implements Initializable {
                 if(queryResult.getString("surnom").equals(usernameField.getText())){
 
                     loginMessage.setText("success");
-                    createAccountForm();
+                    createStudentPage();
                     remplirListeApprenant();
 
                 }else{
@@ -105,10 +121,10 @@ public class LoginController implements Initializable {
         }
     }
 
-    public void createAccountForm(){
+    public void createStudentPage(){
         try{
 
-        Parent root = FXMLLoader.load(getClass().getResource("student.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("/view/student.fxml"));
         Stage registerStage = new Stage();
         registerStage.initStyle(StageStyle.UNDECORATED);
         registerStage.setScene(new Scene(root, 520, 500));

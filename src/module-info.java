@@ -6,4 +6,6 @@ module TreeOfSkills {
     requires mysql.connector.java;
 
     opens sample;
+    opens view;
+    opens controller;
 }

@@ -13,7 +13,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<GridPane alignment="center" hgap="10" vgap="10" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.LoginController">
+<GridPane alignment="center" hgap="10" vgap="10" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.LoginController">
    <children>
       <BorderPane prefHeight="550.0" prefWidth="520.0">
          <left>
@@ -67,7 +67,7 @@
                         <Font name="Barrio Regular" size="10.0" />
                      </font>
                   </Label>
-                  <Button layoutX="162.0" layoutY="504.0" mnemonicParsing="false" onAction="#createAccountForm" prefHeight="9.0" prefWidth="128.0" style="-fx-background-color: #ce0033;" text="Enregistrer Vous" textFill="WHITE">
+                  <Button layoutX="162.0" layoutY="504.0" mnemonicParsing="false" onAction="#toRegisterForm" prefHeight="9.0" prefWidth="128.0" style="-fx-background-color: #ce0033;" text="Enregistrer Vous" textFill="WHITE">
                      <font>
                         <Font name="Barrio Regular" size="10.0" />
                      </font>

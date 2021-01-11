@@ -1,4 +1,4 @@
-package sample;
+package controller;
 
 import java.sql.*;
 
@@ -17,6 +17,7 @@ import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 import javafx.scene.control.ComboBox;
 import javafx.stage.StageStyle;
+import db.DbConnect;
 
 import java.io.File;
 import java.net.URL;
@@ -76,7 +77,7 @@ public class RegisterController implements Initializable {
     public void toLoginPage(){
         try{
 
-            Parent root = FXMLLoader.load(getClass().getResource("login.fxml"));
+            Parent root = FXMLLoader.load(getClass().getResource("/view/login.fxml"));
             Stage registerStage = new Stage();
             registerStage.initStyle(StageStyle.UNDECORATED);
             registerStage.setScene(new Scene(root, 520, 550));
