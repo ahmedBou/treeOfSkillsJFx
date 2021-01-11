@@ -1,4 +1,4 @@
-package com.student;
+package controller;
 
 public class StudentController {
 

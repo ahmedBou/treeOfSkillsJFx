@@ -1,6 +1,4 @@
-package sample;
-
-import java.sql.*;
+package controller;
 
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
@@ -13,11 +11,13 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
+import db.DbConnect;
 
 import java.io.File;
 import java.net.URL;
-import java.util.ResourceBundle;
 import java.sql.Connection;
+import java.sql.Statement;
+import java.util.ResourceBundle;
 
 public class RegisterController implements Initializable {
 

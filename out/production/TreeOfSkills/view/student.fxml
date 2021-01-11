@@ -17,7 +17,7 @@
                <children>
                   <ImageView fx:id="simplonIcon" fitHeight="81.0" fitWidth="139.0" layoutX="28.0" layoutY="2.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../../../img/simplo.png" />
+                        <Image url="@../../img/simplo.png" />
                      </image>
                   </ImageView>
                   <Icon content="ACCESSIBILITY" layoutX="522.0" layoutY="16.0" prefHeight="41.0" prefWidth="51.0" />

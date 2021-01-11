@@ -1,4 +1,5 @@
-package sample;
+package controller;
+
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -10,12 +11,9 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.VBox;
-import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import db.DbConnect;
 
 import java.io.File;
 import java.net.URL;
@@ -27,13 +25,15 @@ import java.util.ResourceBundle;
 
 
 
+
+
 public class LoginController implements Initializable {
 
     static  int session = 0;
     @FXML
     private Button cancelButton;
 
-//    private Button loginButton;
+    private Button loginButton;
 
     @FXML
     private Label loginMessage;
@@ -49,15 +49,10 @@ public class LoginController implements Initializable {
     @FXML
     private PasswordField passwordField;
 
-    @FXML
-    private BorderPane rootPane;
-
-    @FXML
-    private AnchorPane anchor1;
 
 
-    @FXML
-    private Label  NomCompApp;
+
+
 
 
     @Override
@@ -73,8 +68,10 @@ public class LoginController implements Initializable {
 
     public void LoginButtonOnAction(){
         if(!usernameField.getText().isBlank() && !passwordField.getText().isBlank()){
+
             validateLogin();
-            remplirListeAppreanant();
+            createAccountForm();
+
 
 
         }else{
@@ -86,7 +83,7 @@ public class LoginController implements Initializable {
     }
 
     public void cancelButtonOnAction(){
-        //session = 0;
+        session = 0;
         Stage stage = (Stage) cancelButton.getScene().getWindow();
         stage.close();
     }
@@ -97,27 +94,28 @@ public class LoginController implements Initializable {
         String verifyLogin = "SELECT * FROM staff WHERE nomStaff = '"
                 + usernameField.getText() +"' And pswdStaff= '" +passwordField.getText()+"'AND isStaff = 1";
 
-
         try {
             Statement statement = connectDb.createStatement();
             ResultSet queryResult = statement.executeQuery(verifyLogin);
-            while(queryResult.next()){
-                if(queryResult.getString("nomStaff").equals(usernameField.getText())){
+
+            while(queryResult.next()) {
+                if (queryResult.getString("nomStaff").equals(usernameField.getText())) {
 
                     loginMessage.setText("success");
-                    createAccountForm();
+
                     session = queryResult.getInt(2);
                     System.out.println(session);
+                    System.out.println(queryResult.getString("nomStaff"));
 
-                }else{
+                    //cancelButtonOnAction();
+
+
+                } else {
                     loginMessage.setText("invalid mot de passe ou surnom, reessaye");
                 }
 
 
             }
-
-
-
         }catch (Exception e){
             e.printStackTrace();
             e.getCause();
@@ -127,10 +125,13 @@ public class LoginController implements Initializable {
 
     public void createAccountForm(){
         try{
-        Parent root = FXMLLoader.load(getClass().getResource("register.fxml"));
+
+         Parent root = FXMLLoader.load(getClass().getResource("/view/staff.fxml"));
+
+
         Stage registerStage = new Stage();
         registerStage.initStyle(StageStyle.UNDECORATED);
-        registerStage.setScene(new Scene(root, 520, 695));
+        registerStage.setScene(new Scene(root, 1520, 1095));
         registerStage.show();
 
         }catch (Exception e){
@@ -139,54 +140,9 @@ public class LoginController implements Initializable {
         }
     }
 
-    /*public void createFormApp(){
-        try{
-            Parent root = FXMLLoader.load(getClass().getResource("staff.fxml"));
-            Stage registerStage = new Stage();
-            registerStage.initStyle(StageStyle.UNDECORATED);
-            registerStage.setScene(new Scene(root, 520, 695));
-            registerStage.show();
-
-        }catch (Exception e){
-            e.printStackTrace();
-            e.getCause();
-        }
-    }
-    */
-
-
-    public void remplirListeAppreanant() {
-        VBox VbApp = new VBox();
-        VbApp.setMaxSize(220,70);
-
-        HBox HbApp = new HBox();
-        HbApp.setMaxSize(220,70);
-
-
-        DbConnect connectNow = new DbConnect();
-        Connection connectDb = connectNow.getConnect();
-        String recupApp = "select a.nomApprenant from apprenant a , promoapprenant p , staff s where s.id_Promo = p.id_Promo AND s.idStaff ='" +session+ "' AND a.idApprenant = p.idApprenant";
-
-        try {
-            Statement statement = connectDb.createStatement();
-            ResultSet queryResult = statement.executeQuery(recupApp);
-            while(queryResult.next()){
-               // NomCompApp.setText(queryResult.getInt(2)+" "+queryResult.getInt(3));
-
-               // HbApp.getChildren().add(NomCompApp);
-                String x = queryResult.getString(1);
-                System.out.println(x);
-
-
-            }
 
 
 
-        }catch (Exception e){
-            e.printStackTrace();
-            e.getCause();
-        }
 
-    }
 
 }

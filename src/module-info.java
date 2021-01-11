@@ -4,4 +4,7 @@ module TreeOfSkills {
     requires java.sql;
 
     opens sample;
+    opens view;
+    opens controller;
+
 }
