@@ -104,12 +104,12 @@ public class RegisterController implements Initializable {
         System.out.println("hello");
         DbConnect connectNow = new DbConnect();
         Connection connectDb = connectNow.getConnect();
-        String queryCombo = "select titrePromo from promotion";
+        String queryCombo = "select titre_Promo from promotion";
         try {
             Statement statement = connectDb.createStatement();
             ResultSet queryResult = statement.executeQuery(queryCombo);
             while(queryResult.next()){
-                options.add(queryResult.getString("titrePromo"));
+                options.add(queryResult.getString("titre_Promo"));
 
             }
 

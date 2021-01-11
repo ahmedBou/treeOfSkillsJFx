@@ -56,7 +56,7 @@ public class StudentController implements Initializable {
     public void remplirLabelBonjour(){
         DbConnect connectNow = new DbConnect();
         Connection connectDb = connectNow.getConnect();
-        String recupNom = "SELECT nomApp FROM apprenant WHERE idApp = "+sessionApp;
+        String recupNom = "SELECT nomApprenant FROM apprenant WHERE idApprenant = "+sessionApp;
         System.out.println(recupNom);
 
         try {
@@ -81,7 +81,7 @@ public class StudentController implements Initializable {
     // load competences and levels automatically
     @FXML
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        this.loadCompetancesAndLevels();
+//        this.loadCompetancesAndLevels();
         remplirLabelBonjour();
         System.out.println("called");
         File imgPathProfile = new File("img/profile.png");
@@ -100,86 +100,86 @@ public class StudentController implements Initializable {
     }
     // For loading competences and levels
     public void loadCompetancesAndLevels(){
-        DbConnect dbConnect = new DbConnect();
-        Connection connectDb = dbConnect.getConnect();
-
-
-        String query = "SELECT * FROM competence\n" +
-                "LEFT JOIN niveau ON niveau.competenceID = competence.idComp \n" +
-                "UNION\n" +
-                "SELECT * FROM competence\n" +
-                "RIGHT JOIN niveau ON niveau.competenceID = competence.idComp ;";
-        try {
-            Statement statement = connectDb.createStatement();
-            ResultSet queryResult = statement.executeQuery(query);
-            while(queryResult.next()){
-                // Getting some info from db
-                String competanceID = queryResult.getString("competenceID");
-                String compID = queryResult.getString("idComp");
-                String titreNiveau = queryResult.getString("titreNiveau");
-
-                comp1.setText(queryResult.getString("titreComp"));
-                createLevel(compID, competanceID, titreNiveau, comp1Container);
-
-                // checking all competences
-                switch (compID){
-                    case "1": {
-                        comp1.setText(queryResult.getString("titreComp"));
-                        createLevel(compID, competanceID, titreNiveau, comp1Container);
-                        System.out.println("case 1: " + "compID: " + competanceID + " levelID: " + compID);
-                        break;
-                    }
-                    case "2": {
-                        comp2.setText(queryResult.getString("titreComp"));
-                        createLevel(compID, competanceID, titreNiveau, comp2Container);
-//                        System.out.println("case 2: " + "compID: " + competanceID + " compID: " + compID);
-                        break;
-                    }
-                    case "3": {
-                        comp3.setText(queryResult.getString("titreComp"));
-                        createLevel(compID, competanceID, titreNiveau, comp3Container);
-                        System.out.println("case 3: " + "compID: " + competanceID + " compID: " + compID);
-                        break;
-                    }
-                    case "4": {
-                        comp4.setText(queryResult.getString("titreComp"));
-                        createLevel(compID, competanceID, titreNiveau, comp4Container);
-                        System.out.println("case 4: " + "compID: " + competanceID + " compID: " + compID);
-                        break;
-                    }
-                    case "5": {
-                        comp5.setText(queryResult.getString("titreComp"));
-                        createLevel(compID, competanceID, titreNiveau, comp5Container);
-                        System.out.println("case 5: " + "compID: " + competanceID + " compID: " + compID);
-                        break;
-                    }
-                    case "6": {
-                        comp6.setText(queryResult.getString("titreComp"));
-                        createLevel(compID, competanceID, titreNiveau, comp6Container);
-                        System.out.println("case 6: " + "compID: " + competanceID + " compID: " + compID);
-                        break;
-                    }
-                    default:
-                        System.out.println("Unknown competence");
-                }
-            }
-            statement.close();
-            queryResult.close();
-
-        }catch (Exception e){
-//            e.printStackTrace();
-            System.out.println(e.getMessage());
-//            e.getCause();
-        }
-    }
-
-    // For creating levels as buttons
-    private void createLevel(String compID, String compeanceID, String btnText, HBox container){
-        if (compID.equals(compeanceID)){
-            Button b1 = new Button();
-            b1.setText(btnText);
-            container.getChildren().add(b1);
-        }
+//        DbConnect dbConnect = new DbConnect();
+//        Connection connectDb = dbConnect.getConnect();
+//
+//
+//        String query = "SELECT * FROM competence\n" +
+//                "LEFT JOIN niveau ON niveau.competenceID = competence.idComp \n" +
+//                "UNION\n" +
+//                "SELECT * FROM competence\n" +
+//                "RIGHT JOIN niveau ON niveau.competenceID = competence.idComp ;";
+//        try {
+//            Statement statement = connectDb.createStatement();
+//            ResultSet queryResult = statement.executeQuery(query);
+//            while(queryResult.next()){
+//                // Getting some info from db
+//                String competanceID = queryResult.getString("competenceID");
+//                String compID = queryResult.getString("idComp");
+//                String titreNiveau = queryResult.getString("titreNiveau");
+//
+//                comp1.setText(queryResult.getString("titreComp"));
+//                createLevel(compID, competanceID, titreNiveau, comp1Container);
+//
+//                // checking all competences
+//                switch (compID){
+//                    case "1": {
+//                        comp1.setText(queryResult.getString("titreComp"));
+//                        createLevel(compID, competanceID, titreNiveau, comp1Container);
+//                        System.out.println("case 1: " + "compID: " + competanceID + " levelID: " + compID);
+//                        break;
+//                    }
+//                    case "2": {
+//                        comp2.setText(queryResult.getString("titreComp"));
+//                        createLevel(compID, competanceID, titreNiveau, comp2Container);
+////                        System.out.println("case 2: " + "compID: " + competanceID + " compID: " + compID);
+//                        break;
+//                    }
+//                    case "3": {
+//                        comp3.setText(queryResult.getString("titreComp"));
+//                        createLevel(compID, competanceID, titreNiveau, comp3Container);
+//                        System.out.println("case 3: " + "compID: " + competanceID + " compID: " + compID);
+//                        break;
+//                    }
+//                    case "4": {
+//                        comp4.setText(queryResult.getString("titreComp"));
+//                        createLevel(compID, competanceID, titreNiveau, comp4Container);
+//                        System.out.println("case 4: " + "compID: " + competanceID + " compID: " + compID);
+//                        break;
+//                    }
+//                    case "5": {
+//                        comp5.setText(queryResult.getString("titreComp"));
+//                        createLevel(compID, competanceID, titreNiveau, comp5Container);
+//                        System.out.println("case 5: " + "compID: " + competanceID + " compID: " + compID);
+//                        break;
+//                    }
+//                    case "6": {
+//                        comp6.setText(queryResult.getString("titreComp"));
+//                        createLevel(compID, competanceID, titreNiveau, comp6Container);
+//                        System.out.println("case 6: " + "compID: " + competanceID + " compID: " + compID);
+//                        break;
+//                    }
+//                    default:
+//                        System.out.println("Unknown competence");
+//                }
+//            }
+//            statement.close();
+//            queryResult.close();
+//
+//        }catch (Exception e){
+////            e.printStackTrace();
+//            System.out.println(e.getMessage());
+////            e.getCause();
+//        }
+//    }
+//
+//    // For creating levels as buttons
+//    private void createLevel(String compID, String compeanceID, String btnText, HBox container){
+//        if (compID.equals(compeanceID)){
+//            Button b1 = new Button();
+//            b1.setText(btnText);
+//            container.getChildren().add(b1);
+//        }
     }
 
 }

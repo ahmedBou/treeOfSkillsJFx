@@ -63,6 +63,7 @@ public class LoginController implements Initializable {
 
             validateLogin();
 
+
         }else{
             loginMessage.setText("Veuiller entrer votre surnom et votre mot de passe!");
 
@@ -94,19 +95,44 @@ public class LoginController implements Initializable {
                 + usernameField.getText() +"' AND pswdStaff= '"+passwordField.getText()+"'";
         System.out.println(verifyLogin);
 
-        String verifyLoginApp = "SELECT * FROM apprenant WHERE surnom = '"
-                + usernameField.getText() +"' And password= '"+passwordField.getText()+"'";
+        String verifyLoginApp = "SELECT * FROM apprenant WHERE nomApprenant = '"
+                + usernameField.getText() +"' And passeword= '"+passwordField.getText()+"'";
         System.out.println(verifyLoginApp);
+        try {
+            Statement statement1 = connectDb.createStatement();
+            ResultSet queryResultApp = statement1.executeQuery(verifyLoginApp);
+
+            while(queryResultApp.next()){
+                //System.out.println(usernameField.getText().length());
+                //System.out.println(queryResultApp.getString("nomApprenant").length());
+                //System.out.println(usernameField.getText().equals(queryResultApp.getString("nomApprenant")));
+
+                if(queryResultApp.getString("nomApprenant").equals(usernameField.getText())){
+                    loginMessage.setText("success");
+                    sessionApp = queryResultApp.getInt("idApprenant");
+                    System.out.println(sessionApp);
+                    createStudentPage();
+                    remplirListeApprenant();
+
+                }else{
+                    loginMessage.setText("invalid mot de passe ou surnom, reessaye");
+                }
+
+            }
+
+        }catch (Exception e){
+            e.printStackTrace();
+            e.getCause();
+        }
 
         try {
             Statement statement = connectDb.createStatement();
             ResultSet queryResult = statement.executeQuery(verifyLogin);
 
             while(queryResult.next()){
-                System.out.println(usernameField.getText().length());
-                System.out.println(queryResult.getString("nomStaff").length());
+                //System.out.println(usernameField.getText().length());
+                //System.out.println(queryResult.getString("nomStaff").length());
                 //System.out.println(usernameField.getText().equals(queryResult.getString("surnom")));
-
                 if(queryResult.getString("nomStaff").equals(usernameField.getText())){
                     loginMessage.setText("success");
                     session = queryResult.getInt("idStaff");
@@ -124,31 +150,7 @@ public class LoginController implements Initializable {
             e.printStackTrace();
             e.getCause();
         }
-        try {
-            Statement statement1 = connectDb.createStatement();
-            ResultSet queryResultApp = statement1.executeQuery(verifyLoginApp);
 
-            while(queryResultApp.next()){
-                System.out.println(usernameField.getText().length());
-                System.out.println(queryResultApp.getString("surnom").length());
-                System.out.println(usernameField.getText().equals(queryResultApp.getString("surnom")));
-
-                if(queryResultApp.getString("surnom").equals(usernameField.getText())){
-                    loginMessage.setText("success");
-                    sessionApp = queryResultApp.getInt("idApp");
-                    createStudentPage();
-                    remplirListeApprenant();
-
-                }else{
-                    loginMessage.setText("invalid mot de passe ou surnom, reessaye");
-                }
-
-            }
-
-        }catch (Exception e){
-            e.printStackTrace();
-            e.getCause();
-        }
 
     }
 
@@ -191,8 +193,8 @@ public class LoginController implements Initializable {
 
         DbConnect connectNow = new DbConnect();
         Connection connectDb = connectNow.getConnect();
-        String recupApp = "select a.nomApp from apprenant a , promoapprenant p , " +
-                "staff s where s.idPromo = p.idPromo AND s.idStaff ='" +session+ "' AND a.idApp = p.idApp";
+        String recupApp = "select a.nomApprenant from apprenant a , promoapprenant p , " +
+                "staff s where s.id_Promo = p.id_Promo AND s.idStaff ='" +session+ "' AND a.idApprenant = p.idApprenant";
 
         try {
             Statement statement = connectDb.createStatement();
