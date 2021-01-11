@@ -16,6 +16,10 @@
         <SOURCES />
       </library>
     </orderEntry>
+<<<<<<< HEAD
     <orderEntry type="library" exported="" name="javafx.graphics" level="project" />
+=======
+    <orderEntry type="library" name="charm-glisten-4.4.1-javadoc" level="project" />
+>>>>>>> main
   </component>
 </module>

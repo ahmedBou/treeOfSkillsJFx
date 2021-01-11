@@ -1,4 +1,8 @@
 package db;
+<<<<<<< HEAD:src/db/DbConnect.java
+=======
+
+>>>>>>> main:src/sample/DbConnect.java
 import java.sql.Connection;
 import java.sql.DriverManager;
 public class DbConnect {
