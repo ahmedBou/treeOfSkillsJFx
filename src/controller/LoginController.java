@@ -26,10 +26,10 @@ import java.util.ResourceBundle;
 
 public class LoginController implements Initializable {
     static  int session = 0;
+    static int sessionApp = 0;
+
     @FXML
     private Button cancelButton;
-
-//    private Button loginButton;
 
     @FXML
     private Label loginMessage;
@@ -60,6 +60,7 @@ public class LoginController implements Initializable {
     public void LoginButtonOnAction(){
         if(!usernameField.getText().isBlank() &&
                 !passwordField.getText().isBlank()){
+
             validateLogin();
 
         }else{
@@ -74,13 +75,11 @@ public class LoginController implements Initializable {
     }
     public void toRegisterForm(){
         try{
-
             Parent root = FXMLLoader.load(getClass().getResource("/view/register.fxml"));
             Stage registerStage = new Stage();
             registerStage.initStyle(StageStyle.UNDECORATED);
             registerStage.setScene(new Scene(root, 520, 550));
             registerStage.show();
-
         }catch (Exception e){
             e.printStackTrace();
             e.getCause();
@@ -88,37 +87,69 @@ public class LoginController implements Initializable {
     }
 
     public void validateLogin(){
+
         DbConnect connectNow = new DbConnect();
         Connection connectDb = connectNow.getConnect();
-        String verifyLogin = "SELECT * FROM apprenant WHERE surnom = '"
-                + usernameField.getText() +"' And password= '"+passwordField.getText()+"'AND isStaff = 1";
+        String verifyLogin = "SELECT * FROM staff WHERE nomStaff = '"
+                + usernameField.getText() +"' AND pswdStaff= '"+passwordField.getText()+"'";
         System.out.println(verifyLogin);
+
+        String verifyLoginApp = "SELECT * FROM apprenant WHERE surnom = '"
+                + usernameField.getText() +"' And password= '"+passwordField.getText()+"'";
+        System.out.println(verifyLoginApp);
 
         try {
             Statement statement = connectDb.createStatement();
             ResultSet queryResult = statement.executeQuery(verifyLogin);
+
             while(queryResult.next()){
                 System.out.println(usernameField.getText().length());
-                System.out.println(queryResult.getString("surnom").length());
-                System.out.println(usernameField.getText().equals(queryResult.getString("surnom")));
+                System.out.println(queryResult.getString("nomStaff").length());
+                //System.out.println(usernameField.getText().equals(queryResult.getString("surnom")));
 
-                if(queryResult.getString("surnom").equals(usernameField.getText())){
-
+                if(queryResult.getString("nomStaff").equals(usernameField.getText())){
                     loginMessage.setText("success");
+                    session = queryResult.getInt("idStaff");
+                    System.out.println(session);
+                    toRegisterForm();
+                    remplirListeApprenant();
+
+                }else{
+                    loginMessage.setText("invalid mot de passe ou surnom, reessaye");
+                }
+
+            }
+
+        }catch (Exception e){
+            e.printStackTrace();
+            e.getCause();
+        }
+        try {
+            Statement statement1 = connectDb.createStatement();
+            ResultSet queryResultApp = statement1.executeQuery(verifyLoginApp);
+
+            while(queryResultApp.next()){
+                System.out.println(usernameField.getText().length());
+                System.out.println(queryResultApp.getString("surnom").length());
+                System.out.println(usernameField.getText().equals(queryResultApp.getString("surnom")));
+
+                if(queryResultApp.getString("surnom").equals(usernameField.getText())){
+                    loginMessage.setText("success");
+                    sessionApp = queryResultApp.getInt("idApp");
                     createStudentPage();
                     remplirListeApprenant();
 
                 }else{
                     loginMessage.setText("invalid mot de passe ou surnom, reessaye");
                 }
+
             }
-
-
 
         }catch (Exception e){
             e.printStackTrace();
             e.getCause();
         }
+
     }
 
     public void createStudentPage(){
@@ -127,7 +158,7 @@ public class LoginController implements Initializable {
         Parent root = FXMLLoader.load(getClass().getResource("/view/student.fxml"));
         Stage registerStage = new Stage();
         registerStage.initStyle(StageStyle.UNDECORATED);
-        registerStage.setScene(new Scene(root, 520, 500));
+        registerStage.setScene(new Scene(root, 600, 400));
         registerStage.show();
 
         }catch (Exception e){
@@ -135,6 +166,20 @@ public class LoginController implements Initializable {
             e.getCause();
         }
     }
+    /*public void createStaffPage(){
+        try{
+
+            Parent root = FXMLLoader.load(getClass().getResource("/view/staff.fxml"));
+            Stage registerStage = new Stage();
+            registerStage.initStyle(StageStyle.UNDECORATED);
+            registerStage.setScene(new Scene(root, 600, 400));
+            registerStage.show();
+
+        }catch (Exception e){
+            e.printStackTrace();
+            e.getCause();
+        }
+    }*/
 
     public void remplirListeApprenant() {
         VBox VbApp = new VBox();
@@ -146,15 +191,14 @@ public class LoginController implements Initializable {
 
         DbConnect connectNow = new DbConnect();
         Connection connectDb = connectNow.getConnect();
-        String recupApp = "select a.nomApp from apprenant a , promoapprenant p , staff s where s.idPromo = p.idPromo AND s.idStaff ='" +session+ "' AND a.idApp = p.idApp";
+        String recupApp = "select a.nomApp from apprenant a , promoapprenant p , " +
+                "staff s where s.idPromo = p.idPromo AND s.idStaff ='" +session+ "' AND a.idApp = p.idApp";
 
         try {
             Statement statement = connectDb.createStatement();
             ResultSet queryResult = statement.executeQuery(recupApp);
             while(queryResult.next()){
-                // NomCompApp.setText(queryResult.getInt(2)+" "+queryResult.getInt(3));
 
-                // HbApp.getChildren().add(NomCompApp);
                 String x = queryResult.getString(1);
                 System.out.println(x);
             }

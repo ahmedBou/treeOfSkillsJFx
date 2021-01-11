@@ -9,6 +9,7 @@ import javafx.scene.control.ProgressBar;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
+import javafx.stage.Stage;
 
 import java.io.File;
 import java.net.URL;
@@ -16,6 +17,8 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ResourceBundle;
+
+import static controller.LoginController.sessionApp;
 
 public class StudentController implements Initializable {
     // Competances Labels
@@ -35,11 +38,40 @@ public class StudentController implements Initializable {
     ImageView imageProfile;
 
     @FXML
+    ImageView simplonIcon;
+
+    @FXML
+    private Label cancelButton;
+
+    @FXML
     private ProgressBar niv1;
     @FXML
     private ProgressBar niv2;
     @FXML
     private ProgressBar niv3;
+
+    @FXML
+    private Label sessionId;
+
+    public void remplirLabelBonjour(){
+        DbConnect connectNow = new DbConnect();
+        Connection connectDb = connectNow.getConnect();
+        String recupNom = "SELECT nomApp FROM apprenant WHERE idApp = "+sessionApp;
+        System.out.println(recupNom);
+
+        try {
+            Statement statement = connectDb.createStatement();
+            ResultSet queryResult = statement.executeQuery(recupNom);
+            while(queryResult.next()){
+                sessionId.setText(queryResult.getString(1));
+
+            }
+
+        } catch(Exception e){
+            e.printStackTrace();
+            e.getCause();
+        }
+    }
 
 
     // Buttons Levels Containers
@@ -50,13 +82,22 @@ public class StudentController implements Initializable {
     @FXML
     public void initialize(URL url, ResourceBundle resourceBundle) {
         this.loadCompetancesAndLevels();
+        remplirLabelBonjour();
         System.out.println("called");
-        File imgPathSimplon = new File("img/profile.png");
-        Image imgPath = new Image(imgPathSimplon.toURI().toString());
-
+        File imgPathProfile = new File("img/profile.png");
+        Image imgPath = new Image(imgPathProfile.toURI().toString());
         imageProfile.setImage(imgPath);
+
+        File imgPathSimplon = new File("img/simplo.png");
+        Image imgPathP = new Image(imgPathSimplon.toURI().toString());
+        simplonIcon.setImage(imgPathP);
+
     }
 
+    public void cancelButtonOnAction(){
+        Stage stage = (Stage) cancelButton.getScene().getWindow();
+        stage.close();
+    }
     // For loading competences and levels
     public void loadCompetancesAndLevels(){
         DbConnect dbConnect = new DbConnect();

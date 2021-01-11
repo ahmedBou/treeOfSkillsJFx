@@ -1,36 +1,109 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ProgressBar?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.StudentController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.StudentController">
    <top>
-      <AnchorPane prefHeight="70.0" prefWidth="600.0" style="-fx-background-color: #ce0033;" BorderPane.alignment="CENTER" />
+      <AnchorPane prefHeight="73.0" prefWidth="600.0" style="-fx-background-color: #ce0033;" BorderPane.alignment="CENTER">
+         <children>
+            <ImageView fx:id="simplonIcon" fitHeight="71.0" fitWidth="60.0" layoutX="25.0" layoutY="2.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../img/simplo.png" />
+               </image>
+            </ImageView>
+            <Label layoutX="84.0" layoutY="25.0" text="Bonjour" textFill="WHITE">
+               <font>
+                  <Font name="Barrio Regular" size="18.0" />
+               </font>
+            </Label>
+            <Label layoutX="569.0" layoutY="26.0" text="Deconnecter" textFill="WHITE">
+               <font>
+                  <Font name="Barrio Regular" size="18.0" />
+               </font>
+            </Label>
+            <Label fx:id="sessionId" layoutX="163.0" layoutY="25.0" text="Ahmed" textFill="WHITE">
+               <font>
+                  <Font name="Barrio Regular" size="18.0" />
+               </font>
+            </Label>
+         </children></AnchorPane>
    </top>
    <center>
       <AnchorPane prefHeight="200.0" prefWidth="350.0" BorderPane.alignment="CENTER">
          <children>
-            <Label layoutX="140.0" layoutY="14.0" prefHeight="18.0" prefWidth="119.0" text="Mes Competance" />
-            <Label fx:id="comp1" layoutX="43.0" layoutY="57.0" prefHeight="18.0" prefWidth="119.0" text="Competance1" />
-            <Label fx:id="comp2" layoutX="227.0" layoutY="59.0" prefHeight="18.0" prefWidth="119.0" text="Competance2" />
-            <Label fx:id="comp3" layoutX="38.0" layoutY="127.0" prefHeight="18.0" prefWidth="119.0" text="Competance2" />
-            <Label fx:id="comp4" layoutX="227.0" layoutY="127.0" prefHeight="18.0" prefWidth="119.0" text="Competance2" />
-            <Label fx:id="comp6" layoutX="235.0" layoutY="194.0" prefHeight="18.0" prefWidth="119.0" text="Competance2" />
-            <Label fx:id="comp5" layoutX="40.0" layoutY="194.0" prefHeight="18.0" prefWidth="119.0" text="Competance2" />
+            <Label layoutX="118.0" layoutY="14.0" prefHeight="35.0" prefWidth="219.0" text="Mes Competance" textFill="#92c5da">
+               <font>
+                  <Font name="Barrio Regular" size="24.0" />
+               </font></Label>
+            <Label fx:id="comp1" layoutX="16.0" layoutY="71.0" prefHeight="18.0" prefWidth="119.0" text="Competance1">
+               <font>
+                  <Font name="Barlow Condensed Regular" size="14.0" />
+               </font></Label>
+            <ProgressBar layoutX="14.0" layoutY="98.0" prefHeight="23.0" prefWidth="50.0" progress="0.0" style="-fx-background-color: black;" />
+            <ProgressBar layoutX="64.0" layoutY="98.0" prefHeight="23.0" prefWidth="50.0" progress="0.0" style="-fx-background-color: #ce0033;" />
+            <ProgressBar layoutX="113.0" layoutY="98.0" prefHeight="24.0" prefWidth="50.0" progress="0.0" />
+            <Label fx:id="comp111" layoutX="267.0" layoutY="73.0" prefHeight="18.0" prefWidth="119.0" text="Competance1">
+               <font>
+                  <Font name="Barlow Condensed Regular" size="14.0" />
+               </font>
+            </Label>
+            <ProgressBar layoutX="266.0" layoutY="98.0" prefHeight="23.0" prefWidth="50.0" progress="0.0" style="-fx-background-color: black;" />
+            <ProgressBar layoutX="316.0" layoutY="98.0" prefHeight="23.0" prefWidth="50.0" progress="0.0" style="-fx-background-color: #ce0033;" />
+            <ProgressBar layoutX="365.0" layoutY="98.0" prefHeight="24.0" prefWidth="50.0" progress="0.0" />
+            <ProgressBar layoutX="266.0" layoutY="162.0" prefHeight="23.0" prefWidth="50.0" progress="0.0" style="-fx-background-color: black;" />
+            <ProgressBar layoutX="316.0" layoutY="162.0" prefHeight="23.0" prefWidth="50.0" progress="0.0" style="-fx-background-color: #ce0033;" />
+            <ProgressBar layoutX="365.0" layoutY="162.0" prefHeight="24.0" prefWidth="50.0" progress="0.0" />
+            <ProgressBar layoutX="14.0" layoutY="237.0" prefHeight="23.0" prefWidth="50.0" progress="0.0" style="-fx-background-color: black;" />
+            <ProgressBar layoutX="64.0" layoutY="237.0" prefHeight="23.0" prefWidth="50.0" progress="0.0" style="-fx-background-color: #ce0033;" />
+            <ProgressBar layoutX="113.0" layoutY="237.0" prefHeight="24.0" prefWidth="50.0" progress="0.0" />
+            <ProgressBar layoutX="14.0" layoutY="162.0" prefHeight="23.0" prefWidth="50.0" progress="0.0" style="-fx-background-color: black;" />
+            <ProgressBar layoutX="64.0" layoutY="162.0" prefHeight="23.0" prefWidth="50.0" progress="0.0" style="-fx-background-color: #ce0033;" />
+            <ProgressBar layoutX="113.0" layoutY="162.0" prefHeight="24.0" prefWidth="50.0" progress="0.0" />
+            <ProgressBar layoutX="265.0" layoutY="237.0" prefHeight="23.0" prefWidth="50.0" progress="0.0" style="-fx-background-color: black;" />
+            <ProgressBar layoutX="315.0" layoutY="237.0" prefHeight="23.0" prefWidth="50.0" progress="0.0" style="-fx-background-color: #ce0033;" />
+            <ProgressBar layoutX="364.0" layoutY="237.0" prefHeight="24.0" prefWidth="50.0" progress="0.0" />
+            <Label fx:id="comp12" layoutX="16.0" layoutY="135.0" prefHeight="18.0" prefWidth="119.0" text="Competance1">
+               <font>
+                  <Font name="Barlow Condensed Regular" size="14.0" />
+               </font>
+            </Label>
+            <Label fx:id="comp1111" layoutX="266.0" layoutY="211.0" prefHeight="18.0" prefWidth="119.0" text="Competance1">
+               <font>
+                  <Font name="Barlow Condensed Regular" size="14.0" />
+               </font>
+            </Label>
+            <Label fx:id="comp11111" layoutX="267.0" layoutY="135.0" prefHeight="18.0" prefWidth="119.0" text="Competance1">
+               <font>
+                  <Font name="Barlow Condensed Regular" size="14.0" />
+               </font>
+            </Label>
+            <Label fx:id="comp121" layoutX="16.0" layoutY="212.0" prefHeight="18.0" prefWidth="119.0" text="Competance1">
+               <font>
+                  <Font name="Barlow Condensed Regular" size="14.0" />
+               </font>
+            </Label>
          </children>
       </AnchorPane>
    </center>
    <left>
-      <AnchorPane prefHeight="400.0" prefWidth="150.0" BorderPane.alignment="CENTER">
+      <AnchorPane prefHeight="400.0" prefWidth="150.0" style="-fx-background-color: #92c5da;" BorderPane.alignment="CENTER">
          <children>
-            <ImageView fx:id="imageProfile" fitHeight="113.0" fitWidth="130.0" layoutX="10.0" layoutY="11.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="imageProfile" fitHeight="150.0" fitWidth="150.0" layoutY="1.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../../img/profile.png" />
                </image>
             </ImageView>
+            <Label fx:id="cancelButton" layoutX="81.0" layoutY="296.0" onMouseClicked="#cancelButtonOnAction" prefHeight="23.0" prefWidth="63.0" text="Exit..." textFill="WHITE">
+               <font>
+                  <Font name="Barrio Regular" size="18.0" />
+               </font>
+            </Label>
          </children>
       </AnchorPane>
    </left>
