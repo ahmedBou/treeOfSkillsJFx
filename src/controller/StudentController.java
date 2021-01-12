@@ -82,6 +82,7 @@ public class StudentController implements Initializable {
     @FXML
     public void initialize(URL url, ResourceBundle resourceBundle) {
 //        this.loadCompetancesAndLevels();
+        fillLevelComp();
         remplirLabelBonjour();
         System.out.println("called");
         File imgPathProfile = new File("img/profile.png");
@@ -93,12 +94,64 @@ public class StudentController implements Initializable {
         simplonIcon.setImage(imgPathP);
 
     }
-
     public void cancelButtonOnAction(){
         Stage stage = (Stage) cancelButton.getScene().getWindow();
         stage.close();
     }
+    //    select ca.*, c.titreComp , a.nomApprenant ,n.titreNiveau from apprenant a ,competence c ,compapprenant ca ,niveau n where c.idComp = ca.idComp AND a.idApprenant = ca.idApprenant AND c.idNiveau = n.idNiveau
+
     // For loading competences and levels
+    public void fillLevelComp(){
+        DbConnect dbConnect = new DbConnect();
+        Connection connectDb = dbConnect.getConnect();
+
+        String queryFill = "select titreComp, idComp from competence ";
+
+        try{
+            Statement statement = connectDb.createStatement();
+            ResultSet queryFillRes = statement.executeQuery(queryFill);
+            while(queryFillRes.next()){
+                System.out.println("Fill competence and level : "+ queryFillRes.getString(1));
+
+                String compt = queryFillRes.getString("idComp");
+                switch (compt){
+                    case "1":{
+                        comp1.setText(queryFillRes.getString("titreComp"));
+                        break;
+
+                    }
+                    case "2":{
+                        comp2.setText(queryFillRes.getString("titreComp"));
+                        break;
+
+                    }
+//                    case "3":{
+//                        comp3.setText(queryFillRes.getString("titreComp"));
+//                        break;
+//                    }
+//                    case "4":{
+//                        comp4.setText(queryFillRes.getString("titreComp"));
+//                        break;
+//
+//                    }
+                }
+
+
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+            e.getCause();
+        }
+    }
+
+
+
+
+
+
+
+
+
     public void loadCompetancesAndLevels(){
 //        DbConnect dbConnect = new DbConnect();
 //        Connection connectDb = dbConnect.getConnect();

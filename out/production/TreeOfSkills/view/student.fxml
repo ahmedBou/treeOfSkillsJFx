@@ -22,7 +22,7 @@
                   <Font name="Barrio Regular" size="18.0" />
                </font>
             </Label>
-            <Label layoutX="569.0" layoutY="26.0" text="Deconnecter" textFill="WHITE">
+            <Label layoutX="489.0" layoutY="26.0" text="Deconnecter" textFill="WHITE">
                <font>
                   <Font name="Barrio Regular" size="18.0" />
                </font>
@@ -35,7 +35,7 @@
          </children></AnchorPane>
    </top>
    <center>
-      <AnchorPane prefHeight="200.0" prefWidth="350.0" BorderPane.alignment="CENTER">
+      <AnchorPane prefHeight="200.0" prefWidth="0.0" BorderPane.alignment="CENTER">
          <children>
             <Label layoutX="118.0" layoutY="14.0" prefHeight="35.0" prefWidth="219.0" text="Mes Competance" textFill="#92c5da">
                <font>
@@ -48,7 +48,7 @@
             <ProgressBar layoutX="14.0" layoutY="98.0" prefHeight="23.0" prefWidth="50.0" progress="0.0" style="-fx-background-color: black;" />
             <ProgressBar layoutX="64.0" layoutY="98.0" prefHeight="23.0" prefWidth="50.0" progress="0.0" style="-fx-background-color: #ce0033;" />
             <ProgressBar layoutX="113.0" layoutY="98.0" prefHeight="24.0" prefWidth="50.0" progress="0.0" />
-            <Label fx:id="comp111" layoutX="267.0" layoutY="73.0" prefHeight="18.0" prefWidth="119.0" text="Competance1">
+            <Label fx:id="comp2" layoutX="267.0" layoutY="73.0" prefHeight="18.0" prefWidth="119.0" text="Competance1">
                <font>
                   <Font name="Barlow Condensed Regular" size="14.0" />
                </font>
@@ -83,7 +83,7 @@
                   <Font name="Barlow Condensed Regular" size="14.0" />
                </font>
             </Label>
-            <Label fx:id="comp121" layoutX="16.0" layoutY="212.0" prefHeight="18.0" prefWidth="119.0" text="Competance1">
+            <Label fx:id="comp121" layoutX="29.0" layoutY="211.0" prefHeight="18.0" prefWidth="119.0" text="Competance1">
                <font>
                   <Font name="Barlow Condensed Regular" size="14.0" />
                </font>

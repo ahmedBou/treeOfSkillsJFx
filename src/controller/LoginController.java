@@ -93,14 +93,15 @@ public class LoginController implements Initializable {
         Connection connectDb = connectNow.getConnect();
         String verifyLogin = "SELECT * FROM staff WHERE nomStaff = '"
                 + usernameField.getText() +"' AND pswdStaff= '"+passwordField.getText()+"'";
-        System.out.println(verifyLogin);
+//        System.out.println(verifyLogin);
 
         String verifyLoginApp = "SELECT * FROM apprenant WHERE nomApprenant = '"
                 + usernameField.getText() +"' And passeword= '"+passwordField.getText()+"'";
         System.out.println(verifyLoginApp);
+        // Student Login
         try {
-            Statement statement1 = connectDb.createStatement();
-            ResultSet queryResultApp = statement1.executeQuery(verifyLoginApp);
+            Statement statementApp = connectDb.createStatement();
+            ResultSet queryResultApp = statementApp.executeQuery(verifyLoginApp);
 
             while(queryResultApp.next()){
                 //System.out.println(usernameField.getText().length());
@@ -110,48 +111,39 @@ public class LoginController implements Initializable {
                 if(queryResultApp.getString("nomApprenant").equals(usernameField.getText())){
                     loginMessage.setText("success");
                     sessionApp = queryResultApp.getInt("idApprenant");
-                    System.out.println(sessionApp);
+                    System.out.println("session of student: "+ sessionApp);
+
                     createStudentPage();
                     remplirListeApprenant();
-
                 }else{
                     loginMessage.setText("invalid mot de passe ou surnom, reessaye");
                 }
-
             }
 
         }catch (Exception e){
             e.printStackTrace();
             e.getCause();
         }
-
+        // Staff Login
         try {
             Statement statement = connectDb.createStatement();
             ResultSet queryResult = statement.executeQuery(verifyLogin);
-
             while(queryResult.next()){
-                //System.out.println(usernameField.getText().length());
-                //System.out.println(queryResult.getString("nomStaff").length());
-                //System.out.println(usernameField.getText().equals(queryResult.getString("surnom")));
                 if(queryResult.getString("nomStaff").equals(usernameField.getText())){
                     loginMessage.setText("success");
                     session = queryResult.getInt("idStaff");
-                    System.out.println(session);
+                    System.out.println("session of Staff"+session);
                     toRegisterForm();
                     remplirListeApprenant();
 
                 }else{
                     loginMessage.setText("invalid mot de passe ou surnom, reessaye");
                 }
-
             }
-
         }catch (Exception e){
             e.printStackTrace();
             e.getCause();
         }
-
-
     }
 
     public void createStudentPage(){
@@ -160,7 +152,7 @@ public class LoginController implements Initializable {
         Parent root = FXMLLoader.load(getClass().getResource("/view/student.fxml"));
         Stage registerStage = new Stage();
         registerStage.initStyle(StageStyle.UNDECORATED);
-        registerStage.setScene(new Scene(root, 600, 400));
+        registerStage.setScene(new Scene(root, 650, 400));
         registerStage.show();
 
         }catch (Exception e){
@@ -184,25 +176,19 @@ public class LoginController implements Initializable {
     }*/
 
     public void remplirListeApprenant() {
-        VBox VbApp = new VBox();
-        VbApp.setMaxSize(220,70);
-
-        HBox HbApp = new HBox();
-        HbApp.setMaxSize(220,70);
-
 
         DbConnect connectNow = new DbConnect();
         Connection connectDb = connectNow.getConnect();
         String recupApp = "select a.nomApprenant from apprenant a , promoapprenant p , " +
-                "staff s where s.id_Promo = p.id_Promo AND s.idStaff ='" +session+ "' AND a.idApprenant = p.idApprenant";
-
+                "staff s where s.id_Promo = p.id_Promo AND s.idStaff ='"
+                +session+ "' AND a.idApprenant = p.idApprenant";
+//        System.out.println(recupApp);
         try {
             Statement statement = connectDb.createStatement();
             ResultSet queryResult = statement.executeQuery(recupApp);
             while(queryResult.next()){
-
                 String x = queryResult.getString(1);
-                System.out.println(x);
+//                System.out.println(x);
             }
         }catch (Exception e){
             e.printStackTrace();
