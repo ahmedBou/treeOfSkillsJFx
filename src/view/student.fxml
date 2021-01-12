@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.ProgressBar?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -37,57 +37,57 @@
    <center>
       <AnchorPane prefHeight="200.0" prefWidth="0.0" BorderPane.alignment="CENTER">
          <children>
-            <Label layoutX="118.0" layoutY="14.0" prefHeight="35.0" prefWidth="219.0" text="Mes Competance" textFill="#92c5da">
+            <Label layoutX="192.0" layoutY="14.0" prefHeight="35.0" prefWidth="219.0" text="Mes Competance" textFill="#92c5da">
                <font>
                   <Font name="Barrio Regular" size="24.0" />
                </font></Label>
-            <Label fx:id="comp1" layoutX="16.0" layoutY="71.0" prefHeight="18.0" prefWidth="119.0" text="Competance1">
+            <Label fx:id="comp1" layoutX="56.0" layoutY="60.0" prefHeight="18.0" prefWidth="119.0" text="Competance1">
                <font>
                   <Font name="Barlow Condensed Regular" size="14.0" />
                </font></Label>
-            <ProgressBar layoutX="14.0" layoutY="98.0" prefHeight="23.0" prefWidth="50.0" progress="0.0" style="-fx-background-color: black;" />
-            <ProgressBar layoutX="64.0" layoutY="98.0" prefHeight="23.0" prefWidth="50.0" progress="0.0" style="-fx-background-color: #ce0033;" />
-            <ProgressBar layoutX="113.0" layoutY="98.0" prefHeight="24.0" prefWidth="50.0" progress="0.0" />
-            <Label fx:id="comp2" layoutX="267.0" layoutY="73.0" prefHeight="18.0" prefWidth="119.0" text="Competance1">
+            <Label fx:id="comp2" layoutX="339.0" layoutY="61.0" prefHeight="18.0" prefWidth="119.0" text="Competance1">
                <font>
                   <Font name="Barlow Condensed Regular" size="14.0" />
                </font>
             </Label>
-            <ProgressBar layoutX="266.0" layoutY="98.0" prefHeight="23.0" prefWidth="50.0" progress="0.0" style="-fx-background-color: black;" />
-            <ProgressBar layoutX="316.0" layoutY="98.0" prefHeight="23.0" prefWidth="50.0" progress="0.0" style="-fx-background-color: #ce0033;" />
-            <ProgressBar layoutX="365.0" layoutY="98.0" prefHeight="24.0" prefWidth="50.0" progress="0.0" />
-            <ProgressBar layoutX="266.0" layoutY="162.0" prefHeight="23.0" prefWidth="50.0" progress="0.0" style="-fx-background-color: black;" />
-            <ProgressBar layoutX="316.0" layoutY="162.0" prefHeight="23.0" prefWidth="50.0" progress="0.0" style="-fx-background-color: #ce0033;" />
-            <ProgressBar layoutX="365.0" layoutY="162.0" prefHeight="24.0" prefWidth="50.0" progress="0.0" />
-            <ProgressBar layoutX="14.0" layoutY="237.0" prefHeight="23.0" prefWidth="50.0" progress="0.0" style="-fx-background-color: black;" />
-            <ProgressBar layoutX="64.0" layoutY="237.0" prefHeight="23.0" prefWidth="50.0" progress="0.0" style="-fx-background-color: #ce0033;" />
-            <ProgressBar layoutX="113.0" layoutY="237.0" prefHeight="24.0" prefWidth="50.0" progress="0.0" />
-            <ProgressBar layoutX="14.0" layoutY="162.0" prefHeight="23.0" prefWidth="50.0" progress="0.0" style="-fx-background-color: black;" />
-            <ProgressBar layoutX="64.0" layoutY="162.0" prefHeight="23.0" prefWidth="50.0" progress="0.0" style="-fx-background-color: #ce0033;" />
-            <ProgressBar layoutX="113.0" layoutY="162.0" prefHeight="24.0" prefWidth="50.0" progress="0.0" />
-            <ProgressBar layoutX="265.0" layoutY="237.0" prefHeight="23.0" prefWidth="50.0" progress="0.0" style="-fx-background-color: black;" />
-            <ProgressBar layoutX="315.0" layoutY="237.0" prefHeight="23.0" prefWidth="50.0" progress="0.0" style="-fx-background-color: #ce0033;" />
-            <ProgressBar layoutX="364.0" layoutY="237.0" prefHeight="24.0" prefWidth="50.0" progress="0.0" />
-            <Label fx:id="comp12" layoutX="16.0" layoutY="135.0" prefHeight="18.0" prefWidth="119.0" text="Competance1">
+            <Label fx:id="comp12" layoutX="56.0" layoutY="134.0" prefHeight="18.0" prefWidth="119.0" text="Competance1">
                <font>
                   <Font name="Barlow Condensed Regular" size="14.0" />
                </font>
             </Label>
-            <Label fx:id="comp1111" layoutX="266.0" layoutY="211.0" prefHeight="18.0" prefWidth="119.0" text="Competance1">
+            <Label fx:id="comp1111" layoutX="340.0" layoutY="211.0" prefHeight="18.0" prefWidth="119.0" text="Competance1">
                <font>
                   <Font name="Barlow Condensed Regular" size="14.0" />
                </font>
             </Label>
-            <Label fx:id="comp11111" layoutX="267.0" layoutY="135.0" prefHeight="18.0" prefWidth="119.0" text="Competance1">
+            <Label fx:id="comp11111" layoutX="341.0" layoutY="135.0" prefHeight="18.0" prefWidth="119.0" text="Competance1">
                <font>
                   <Font name="Barlow Condensed Regular" size="14.0" />
                </font>
             </Label>
-            <Label fx:id="comp121" layoutX="29.0" layoutY="211.0" prefHeight="18.0" prefWidth="119.0" text="Competance1">
+            <Label fx:id="comp121" layoutX="56.0" layoutY="210.0" prefHeight="18.0" prefWidth="119.0" text="Competance1">
                <font>
                   <Font name="Barlow Condensed Regular" size="14.0" />
                </font>
             </Label>
+            <Button fx:id="comp1Level1" layoutX="56.0" layoutY="92.0" mnemonicParsing="false" onAction="#handle" prefHeight="25.0" prefWidth="73.0" />
+            <Button fx:id="comp1Level3" layoutX="202.0" layoutY="92.0" mnemonicParsing="false" onAction="#handle" prefHeight="25.0" prefWidth="73.0" />
+            <Button fx:id="comp1Level2" layoutX="129.0" layoutY="92.0" mnemonicParsing="false" onAction="#handle" prefHeight="25.0" prefWidth="73.0" />
+            <Button fx:id="comp2Level1" layoutX="340.0" layoutY="93.0" mnemonicParsing="false" onAction="#handle" prefHeight="25.0" prefWidth="73.0" />
+            <Button fx:id="comp2Level3" layoutX="486.0" layoutY="93.0" mnemonicParsing="false" onAction="#handle" prefHeight="25.0" prefWidth="73.0" />
+            <Button fx:id="comp2Level2" layoutX="413.0" layoutY="93.0" mnemonicParsing="false" onAction="#handle" prefHeight="25.0" prefWidth="73.0" />
+            <Button fx:id="comp4Level1" layoutX="340.0" layoutY="163.0" mnemonicParsing="false" onAction="#handle" prefHeight="25.0" prefWidth="73.0" />
+            <Button fx:id="comp4Level3" layoutX="486.0" layoutY="163.0" mnemonicParsing="false" onAction="#handle" prefHeight="25.0" prefWidth="73.0" />
+            <Button fx:id="comp4Level2" layoutX="413.0" layoutY="163.0" mnemonicParsing="false" onAction="#handle" prefHeight="25.0" prefWidth="73.0" />
+            <Button fx:id="comp6Level1" layoutX="340.0" layoutY="242.0" mnemonicParsing="false" onAction="#handle" prefHeight="25.0" prefWidth="73.0" />
+            <Button fx:id="comp6Level3" layoutX="486.0" layoutY="242.0" mnemonicParsing="false" onAction="#handle" prefHeight="25.0" prefWidth="73.0" />
+            <Button fx:id="comp6Level2" layoutX="413.0" layoutY="242.0" mnemonicParsing="false" onAction="#handle" prefHeight="25.0" prefWidth="73.0" />
+            <Button fx:id="comp3Level1" layoutX="56.0" layoutY="162.0" mnemonicParsing="false" onAction="#handle" prefHeight="25.0" prefWidth="73.0" />
+            <Button fx:id="comp3Level3" layoutX="202.0" layoutY="162.0" mnemonicParsing="false" onAction="#handle" prefHeight="25.0" prefWidth="73.0" />
+            <Button fx:id="comp3Level2" layoutX="129.0" layoutY="162.0" mnemonicParsing="false" onAction="#handle" prefHeight="25.0" prefWidth="73.0" />
+            <Button fx:id="comp5Level1" layoutX="56.0" layoutY="241.0" mnemonicParsing="false" onAction="#handle" prefHeight="25.0" prefWidth="73.0" />
+            <Button fx:id="comp5Level3" layoutX="202.0" layoutY="241.0" mnemonicParsing="false" onAction="#handle" prefHeight="25.0" prefWidth="73.0" />
+            <Button fx:id="comp5Level2" layoutX="129.0" layoutY="241.0" mnemonicParsing="false" onAction="#handle" prefHeight="25.0" prefWidth="73.0" />
          </children>
       </AnchorPane>
    </center>
