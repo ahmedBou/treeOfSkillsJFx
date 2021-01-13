@@ -41,31 +41,31 @@
                <font>
                   <Font name="Barrio Regular" size="24.0" />
                </font></Label>
-            <Label fx:id="comp1" layoutX="56.0" layoutY="60.0" prefHeight="18.0" prefWidth="119.0" text="Competance1">
+            <Label fx:id="comp1" layoutX="56.0" layoutY="60.0" prefHeight="20.0" prefWidth="218.0" text="Competance1">
                <font>
                   <Font name="Barlow Condensed Regular" size="14.0" />
                </font></Label>
-            <Label fx:id="comp2" layoutX="339.0" layoutY="61.0" prefHeight="18.0" prefWidth="119.0" text="Competance1">
+            <Label fx:id="comp2" layoutX="339.0" layoutY="61.0" prefHeight="20.0" prefWidth="219.0" text="Competance1">
                <font>
                   <Font name="Barlow Condensed Regular" size="14.0" />
                </font>
             </Label>
-            <Label fx:id="comp12" layoutX="56.0" layoutY="134.0" prefHeight="18.0" prefWidth="119.0" text="Competance1">
+            <Label fx:id="comp3" layoutX="56.0" layoutY="134.0" prefHeight="20.0" prefWidth="221.0" text="Competance1">
                <font>
                   <Font name="Barlow Condensed Regular" size="14.0" />
                </font>
             </Label>
-            <Label fx:id="comp1111" layoutX="340.0" layoutY="211.0" prefHeight="18.0" prefWidth="119.0" text="Competance1">
+            <Label fx:id="comp6" layoutX="340.0" layoutY="211.0" prefHeight="20.0" prefWidth="219.0" text="Competance1">
                <font>
                   <Font name="Barlow Condensed Regular" size="14.0" />
                </font>
             </Label>
-            <Label fx:id="comp11111" layoutX="341.0" layoutY="135.0" prefHeight="18.0" prefWidth="119.0" text="Competance1">
+            <Label fx:id="comp4" layoutX="341.0" layoutY="135.0" prefHeight="20.0" prefWidth="218.0" text="Competance1">
                <font>
                   <Font name="Barlow Condensed Regular" size="14.0" />
                </font>
             </Label>
-            <Label fx:id="comp121" layoutX="56.0" layoutY="210.0" prefHeight="18.0" prefWidth="119.0" text="Competance1">
+            <Label fx:id="comp5" layoutX="56.0" layoutY="210.0" prefHeight="20.0" prefWidth="218.0" text="Competance1">
                <font>
                   <Font name="Barlow Condensed Regular" size="14.0" />
                </font>
