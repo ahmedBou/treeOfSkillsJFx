@@ -8,6 +8,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
@@ -41,23 +42,55 @@ public class StaffController implements Initializable {
     @FXML
     public  AnchorPane AnchorListes;
     @FXML
+    public  AnchorPane AnchorRef;
+    @FXML
+    public  AnchorPane AnchorPromo;
+    @FXML
     public    Label promoLabel;
     @FXML
     public    Label refLabel;
 
 
 
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
+
         remplirPromoLabel();
         remplirListeApprenant();
-        remplirReferienciel();
+
 
     }
 
+    int idApp = 0;
+
+
+
+    public int parcourirCompAppNiv(int Appx , int Comp){
+        int AppCompX =-1;
+        DbConnect connectNow = new DbConnect();
+        Connection connectDb = connectNow.getConnect();
+        try {
+            Statement st5 = connectDb.createStatement();
+            ResultSet reqRefAppCompNiv = st5.executeQuery("SELECT IdNiveau from compapprenant where idApprenant = "+Appx+" AND idComp = "+Comp+" ORDER BY IdNiveau DESC LIMIT 1");
+            while (reqRefAppCompNiv.next()){
+
+               AppCompX = reqRefAppCompNiv.getInt(1);
+            }
+        }catch(Exception e){
+            e.printStackTrace();
+            e.getCause();
+        }
+        return  AppCompX;
+
+        }
+
+
+
     public void remplirListeApprenant() {
         int i = 0;
+
         DbConnect connectNow = new DbConnect();
         Connection connectDb = connectNow.getConnect();
         String recupApp = "select a.nomApprenant ,a.prenomApprenant ,a.idApprenant from apprenant a , promoapprenant p , staff s where s.id_Promo = p.id_Promo AND s.idStaff ='"+session+"' AND a.idApprenant = p.idApprenant";
@@ -90,11 +123,14 @@ public class StaffController implements Initializable {
                             @Override
                             public void handle(ActionEvent event){
                                 System.out.println(Integer.parseInt(app1.getId()));
-                                int idApp = Integer.parseInt(app1.getId());
+                                idApp = Integer.parseInt(app1.getId());
                                 DbConnect connectNow = new DbConnect();
                                 Connection connectDb = connectNow.getConnect();
                                 String recupApp = "select a.nomApprenant ,a.prenomApprenant ,a.idApprenant from apprenant a , promoapprenant p , staff s where s.id_Promo = p.id_Promo AND s.idStaff ='"+session+"' AND a.idApprenant = p.idApprenant";
                                 System.out.println(recupApp);
+                                AnchorRef.getChildren().clear();
+                                remplirCompetenceApp();
+
 
                                 }
                             }
@@ -138,26 +174,195 @@ public class StaffController implements Initializable {
         }
     }
 
-    public void remplirReferienciel() {
 
+
+    public void remplirCompetenceApp(){
+        //
         DbConnect connectNow = new DbConnect();
         Connection connectDb = connectNow.getConnect();
 
-        String recupRef = "SELECT ref.titreRef from refereniel ref , promotion p , staff s WHERE ref.id_Promo = p.id_Promo AND s.id_Promo = p.id_Promo And s.idStaff="+session;
+
+        int positionYHbox = 50;
+        int cpt =0;
+        int idRef = 0;
+        int s= 10;
+        int idComp =0;
+
+        ScrollPane sc = new ScrollPane();
+
         try {
-            Statement st2 = connectDb.createStatement();
-            ResultSet reqRef = st2.executeQuery(recupRef);
-            while (reqRef.next()) {
-                //System.out.println(reqRef.getString("titre_Promo"));
-                refLabel.setText(reqRef.getString(1));
+            Statement st3 = connectDb.createStatement();
+            ResultSet reqRefApp = st3.executeQuery("SELECT DISTINCT ref.titreRef , ref.idRef from refereniel ref , apprenant a , promotion p  , promoapprenant pr WHERE pr.id_Promo = p.id_Promo AND ref.id_Promo = p.id_Promo AND a.idApprenant = pr.idApprenant AND a.idApprenant ="+idApp);
+
+            while (reqRefApp.next()) {
+
+                AnchorPane AnchorComp = new AnchorPane();
+                AnchorComp.setMinWidth(1255);
+                AnchorComp.setMinHeight(400);
+                idRef = reqRefApp.getInt(2);
+
+                Label RefApp = new Label();
+                RefApp.setMinWidth(300);
+                RefApp.setMinHeight(40);
+                RefApp.setStyle("-fx-font-size: 28px");
+
+                RefApp.setText(reqRefApp.getString(1));
+                AnchorComp.getChildren().add(RefApp);
+                AnchorComp.setLayoutY(s);
+                AnchorComp.setLayoutX(0);
 
 
+
+                try {
+                    Statement st4 = connectDb.createStatement();
+                    ResultSet reqComApp = st4.executeQuery("SELECT c.titreComp ,c.idComp from competence c ,compapprenant ca ,apprenant a , refereniel ref where ca.idApprenant = a.idApprenant And ca.idComp = c.idComp AND a.idApprenant ="+idApp+" AND ref.idRef = c.idRef AND ref.idRef = "+idRef);
+
+                    while (reqComApp.next()){
+
+
+                        idComp = reqComApp.getInt(2);
+                        cpt++;
+
+                        AnchorPane AnchorCompApp = new AnchorPane();
+                        AnchorComp.setMinWidth(600);
+                        AnchorComp.setMinHeight(250);
+
+                        if(cpt%2 == 1){
+
+                            Label Nomc = new Label();
+
+                            Button b1 =new Button();
+                            Button b2 =new Button();
+                            Button b3 =new Button();
+                            b1.setMinWidth(100);
+                            b1.setMinHeight(20);
+                            b2.setMinWidth(100);
+                            b2.setMinHeight(20);
+                            b3.setMinWidth(100);
+                            b3.setMinHeight(20);
+                            b1.setText("");
+                            b2.setText("");
+                            b3.setText("");
+                            b1.setLayoutX(20);
+                            b1.setLayoutY(40);
+                            b2.setLayoutX(120);
+                            b2.setLayoutY(40);
+                            b3.setLayoutX(220);
+                            b3.setLayoutY(40);
+
+                            switch (parcourirCompAppNiv(idApp,idComp)){
+                                case 1: {
+                                    b1.setStyle("-fx-background-color: green");
+                                    break;
+                                }
+                                case 2: {
+                                    b1.setStyle("-fx-background-color: green");
+                                    b2.setStyle("-fx-background-color: green");
+                                    break;
+                                }
+                                case 3: {
+                                    b1.setStyle("-fx-background-color: green");
+                                    b2.setStyle("-fx-background-color: green");
+                                    b3.setStyle("-fx-background-color: green");
+                                    break;
+                                }
+
+                            }
+
+
+
+                            Nomc.setText(reqComApp.getString(1));
+
+                            AnchorCompApp.getChildren().addAll(Nomc,b1,b2,b3);
+
+                            AnchorCompApp.setLayoutX(20);
+                            AnchorCompApp.setLayoutY(positionYHbox);
+
+                            AnchorComp.getChildren().add(AnchorCompApp);
+
+
+                        }
+                        else {
+
+                            Label Nomc = new Label();
+
+                            Button b1 =new Button();
+                            Button b2 =new Button();
+                            Button b3 =new Button();
+
+
+                            b1.setMinWidth(100);
+                            b1.setMinHeight(20);
+                            b2.setMinWidth(100);
+                            b2.setMinHeight(20);
+                            b3.setMinWidth(100);
+                            b3.setMinHeight(20);
+                            b1.setText("");
+                            b2.setText("");
+                            b3.setText("");
+
+                            b1.setLayoutX(20);
+                            b1.setLayoutY(40);
+                            b2.setLayoutX(120);
+                            b2.setLayoutY(40);
+                            b3.setLayoutX(220);
+                            b3.setLayoutY(40);
+
+
+                            AnchorCompApp.setLayoutX(620);
+                            AnchorCompApp.setLayoutY(positionYHbox);
+
+                            switch (parcourirCompAppNiv(idApp,idComp)){
+                                case 1: {
+                                    b1.setStyle("-fx-background-color: green");
+                                    break;
+                                }
+                                case 2: {
+                                    b1.setStyle("-fx-background-color: green");
+                                    b2.setStyle("-fx-background-color: green");
+                                    break;
+                                }
+                                case 3: {
+                                    b1.setStyle("-fx-background-color: green");
+                                    b2.setStyle("-fx-background-color: green");
+                                    b3.setStyle("-fx-background-color: green");
+                                    break;
+                                }
+
+                            }
+
+                            Nomc.setText(reqComApp.getString(1));
+
+                            AnchorCompApp.getChildren().add(Nomc);
+                            AnchorCompApp.getChildren().add(b1);
+                            AnchorCompApp.getChildren().add(b2);
+                            AnchorCompApp.getChildren().add(b3);
+                            AnchorComp.getChildren().add(AnchorCompApp);
+
+
+                        }
+                        positionYHbox +=50;
+                    }
+                    cpt =0;
+                    //AnchorComp.getChildren().add(Vbox);
+                    //st4.close();
+                }catch(Exception e){
+                    e.printStackTrace();
+                    e.getCause();
+                }
+
+
+                AnchorRef.getChildren().add(AnchorComp);
+                s +=400;
+                positionYHbox = 50;
             }
+
+            //st3.close();
         }catch(Exception e){
             e.printStackTrace();
             e.getCause();
         }
+        sc.setContent(AnchorPromo);
     }
 }
 
-//select a.nomApprenant , s.nomStaff , r.titreRef,pr.titre_Promo from apprenant a , promoapprenant p ,promotion pr , staff s ,refereniel r where a.idApprenant = p.idApprenant AND P.id_Promo = r.id_Promo And s.idStaff = 1 and P.id_Promo =s.id_Promo AND pr.id_Promo = p.id_Promo
