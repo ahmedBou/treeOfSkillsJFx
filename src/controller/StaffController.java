@@ -41,10 +41,13 @@ public class StaffController implements Initializable {
     public  VBox VbApp;
     @FXML
     public  AnchorPane AnchorListes;
+<<<<<<< HEAD
     @FXML
     public  AnchorPane AnchorRef;
     @FXML
     public  AnchorPane AnchorPromo;
+=======
+>>>>>>> f544d8bf73b67833b2fc3fdd91c27b6059d3ca89
     @FXML
     public    Label promoLabel;
     @FXML
@@ -52,7 +55,10 @@ public class StaffController implements Initializable {
 
 
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> f544d8bf73b67833b2fc3fdd91c27b6059d3ca89
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
@@ -90,7 +96,10 @@ public class StaffController implements Initializable {
 
     public void remplirListeApprenant() {
         int i = 0;
+<<<<<<< HEAD
 
+=======
+>>>>>>> f544d8bf73b67833b2fc3fdd91c27b6059d3ca89
         DbConnect connectNow = new DbConnect();
         Connection connectDb = connectNow.getConnect();
         String recupApp = "select a.nomApprenant ,a.prenomApprenant ,a.idApprenant from apprenant a , promoapprenant p , staff s where s.id_Promo = p.id_Promo AND s.idStaff ='"+session+"' AND a.idApprenant = p.idApprenant";
@@ -123,14 +132,21 @@ public class StaffController implements Initializable {
                             @Override
                             public void handle(ActionEvent event){
                                 System.out.println(Integer.parseInt(app1.getId()));
+<<<<<<< HEAD
                                 idApp = Integer.parseInt(app1.getId());
+=======
+                                int idApp = Integer.parseInt(app1.getId());
+>>>>>>> f544d8bf73b67833b2fc3fdd91c27b6059d3ca89
                                 DbConnect connectNow = new DbConnect();
                                 Connection connectDb = connectNow.getConnect();
                                 String recupApp = "select a.nomApprenant ,a.prenomApprenant ,a.idApprenant from apprenant a , promoapprenant p , staff s where s.id_Promo = p.id_Promo AND s.idStaff ='"+session+"' AND a.idApprenant = p.idApprenant";
                                 System.out.println(recupApp);
+<<<<<<< HEAD
                                 AnchorRef.getChildren().clear();
                                 remplirCompetenceApp();
 
+=======
+>>>>>>> f544d8bf73b67833b2fc3fdd91c27b6059d3ca89
 
                                 }
                             }
@@ -366,3 +382,7 @@ public class StaffController implements Initializable {
     }
 }
 
+<<<<<<< HEAD
+=======
+//select a.nomApprenant , s.nomStaff , r.titreRef,pr.titre_Promo from apprenant a , promoapprenant p ,promotion pr , staff s ,refereniel r where a.idApprenant = p.idApprenant AND P.id_Promo = r.id_Promo And s.idStaff = 1 and P.id_Promo =s.id_Promo AND pr.id_Promo = p.id_Promo
+>>>>>>> f544d8bf73b67833b2fc3fdd91c27b6059d3ca89

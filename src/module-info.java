@@ -6,5 +6,8 @@ module TreeOfSkills {
     opens sample;
     opens view;
     opens controller;
+<<<<<<< HEAD
 
+=======
+>>>>>>> main
 }

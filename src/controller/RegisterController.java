@@ -1,16 +1,28 @@
 package controller;
+<<<<<<< HEAD:src/controller/RegisterController.java
+=======
+
+import java.sql.*;
+>>>>>>> main:src/sample/RegisterController.java
 
 import javafx.application.Platform;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.PasswordField;
-import javafx.scene.control.TextField;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
+<<<<<<< HEAD:src/controller/RegisterController.java
+=======
+import javafx.scene.control.ComboBox;
+import javafx.stage.StageStyle;
+>>>>>>> main:src/sample/RegisterController.java
 import db.DbConnect;
 
 import java.io.File;
@@ -40,9 +52,6 @@ public class RegisterController implements Initializable {
     private PasswordField confirmPass;
 
     @FXML
-    private Button register;
-
-    @FXML
     private Label registerMsg;
 
     @FXML
@@ -53,6 +62,10 @@ public class RegisterController implements Initializable {
     private Label registerSuccess;
     @FXML
     private Label matchPass;
+    @FXML
+    private ComboBox<String> combo;
+
+    static ObservableList<String> options = FXCollections.observableArrayList();
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -68,6 +81,20 @@ public class RegisterController implements Initializable {
         Platform.exit();
     }
 
+    public void toLoginPage(){
+        try{
+
+            Parent root = FXMLLoader.load(getClass().getResource("/view/login.fxml"));
+            Stage registerStage = new Stage();
+            registerStage.initStyle(StageStyle.UNDECORATED);
+            registerStage.setScene(new Scene(root, 520, 550));
+            registerStage.show();
+
+        }catch (Exception e){
+            e.printStackTrace();
+            e.getCause();
+        }
+    }
     public void registerOnAction() {
         System.out.println("hello");
         if (!firstName.getText().isBlank() &&
@@ -80,9 +107,28 @@ public class RegisterController implements Initializable {
             registerMsg.setText("veuiller remplir tout les champs!!!");
         }
     }
-    public void remplirChamps(){
-        //connectio & rql
+    public void promoChoice(){
+        System.out.println("hello");
+        DbConnect connectNow = new DbConnect();
+        Connection connectDb = connectNow.getConnect();
+        String queryCombo = "select titre_Promo from promotion";
+        try {
+            Statement statement = connectDb.createStatement();
+            ResultSet queryResult = statement.executeQuery(queryCombo);
+            while(queryResult.next()){
+                options.add(queryResult.getString("titre_Promo"));
 
+            }
+
+            combo.setItems(options);
+
+            statement.close();
+            queryResult.close();
+
+        }catch (Exception e){
+            e.printStackTrace();
+            e.getCause();
+        }
     }
 
     public void registerOnAction(ActionEvent event) {
@@ -95,16 +141,17 @@ public class RegisterController implements Initializable {
 
     }
     public void registerValidation(){
+
         DbConnect connectNow = new DbConnect();
         Connection connectDb = connectNow.getConnect();
         String firstname = firstName.getText();
         String lastName = lastname.getText();
         String userName = username.getText();
         String emailAdd = email.getText();
-        String tels = tel.getText();
+        int tels = Integer.parseInt(tel.getText());
         String passwords = password.getText();
 
-        int idApp = 4;
+        int idApp = 8;
         String insertField = "INSERT INTO apprenant(idApp, nomApp, prenomApp, surnom,emailApp, tel, password) VALUES ('" ;
         String insertValues= idApp +"','" +firstname +"','"+ lastName +"','"+ userName +"','"+ emailAdd +"','"+ tels +"','"+ passwords + "')";
         String insertToRegister = insertField + insertValues;
@@ -123,6 +170,7 @@ public class RegisterController implements Initializable {
 
 
     }
+
 
 }
 
