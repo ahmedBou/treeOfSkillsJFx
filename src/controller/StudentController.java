@@ -91,8 +91,6 @@ public class StudentController implements Initializable, EventHandler {
         }
     }
 
-
-
     // load competences and levels automatically
     @FXML
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -133,25 +131,28 @@ public class StudentController implements Initializable, EventHandler {
                     case "1":{
                         comp1.setText(queryFillRes.getString("titreComp"));
                         break;
-
                     }
                     case "2":{
                         comp2.setText(queryFillRes.getString("titreComp"));
                         break;
-
                     }
-//                    case "3":{
-//                        comp3.setText(queryFillRes.getString("titreComp"));
-//                        break;
-//                    }
-//                    case "4":{
-//                        comp4.setText(queryFillRes.getString("titreComp"));
-//                        break;
-//
-//                    }
+                    case "3":{
+                        comp3.setText(queryFillRes.getString("titreComp"));
+                        break;
+                    }
+                    case "4":{
+                        comp4.setText(queryFillRes.getString("titreComp"));
+                        break;
+                    }
+                    case "5":{
+                        comp5.setText(queryFillRes.getString("titreComp"));
+                        break;
+                    }
+                    case "6":{
+                        comp6.setText(queryFillRes.getString("titreComp"));
+                        break;
+                    }
                 }
-
-
             }
         }catch (Exception e){
             e.printStackTrace();
@@ -165,13 +166,13 @@ public class StudentController implements Initializable, EventHandler {
     }
 
     // Insert current clicked level to database
-    private void insertCurrentLevel(int levelID, int competenceID){
+    private void insertCurrentLevel(int appID,int competenceID, int levelID){
         // Open connection to database
         DbConnect dbConnect = new DbConnect();
         Connection connectDb = dbConnect.getConnect();
 
         // Query that expect to be executed
-        String query = "UPDATE competence SET idNiveau = '" + levelID + "' WHERE idComp = " + competenceID + ";";
+        String query = "insert into compapprenant VALUES("+appID+","+levelID+","+competenceID+")";
         System.out.println(query);
         try {
             Statement statement  = connectDb.createStatement();
@@ -187,184 +188,97 @@ public class StudentController implements Initializable, EventHandler {
         }
     }
 
-
-
-
-
-
-
-    public void loadCompetancesAndLevels(){
-//        DbConnect dbConnect = new DbConnect();
-//        Connection connectDb = dbConnect.getConnect();
-//
-//
-//        String query = "SELECT * FROM competence\n" +
-//                "LEFT JOIN niveau ON niveau.competenceID = competence.idComp \n" +
-//                "UNION\n" +
-//                "SELECT * FROM competence\n" +
-//                "RIGHT JOIN niveau ON niveau.competenceID = competence.idComp ;";
-//        try {
-//            Statement statement = connectDb.createStatement();
-//            ResultSet queryResult = statement.executeQuery(query);
-//            while(queryResult.next()){
-//                // Getting some info from db
-//                String competanceID = queryResult.getString("competenceID");
-//                String compID = queryResult.getString("idComp");
-//                String titreNiveau = queryResult.getString("titreNiveau");
-//
-//                comp1.setText(queryResult.getString("titreComp"));
-//                createLevel(compID, competanceID, titreNiveau, comp1Container);
-//
-//                // checking all competences
-//                switch (compID){
-//                    case "1": {
-//                        comp1.setText(queryResult.getString("titreComp"));
-//                        createLevel(compID, competanceID, titreNiveau, comp1Container);
-//                        System.out.println("case 1: " + "compID: " + competanceID + " levelID: " + compID);
-//                        break;
-//                    }
-//                    case "2": {
-//                        comp2.setText(queryResult.getString("titreComp"));
-//                        createLevel(compID, competanceID, titreNiveau, comp2Container);
-////                        System.out.println("case 2: " + "compID: " + competanceID + " compID: " + compID);
-//                        break;
-//                    }
-//                    case "3": {
-//                        comp3.setText(queryResult.getString("titreComp"));
-//                        createLevel(compID, competanceID, titreNiveau, comp3Container);
-//                        System.out.println("case 3: " + "compID: " + competanceID + " compID: " + compID);
-//                        break;
-//                    }
-//                    case "4": {
-//                        comp4.setText(queryResult.getString("titreComp"));
-//                        createLevel(compID, competanceID, titreNiveau, comp4Container);
-//                        System.out.println("case 4: " + "compID: " + competanceID + " compID: " + compID);
-//                        break;
-//                    }
-//                    case "5": {
-//                        comp5.setText(queryResult.getString("titreComp"));
-//                        createLevel(compID, competanceID, titreNiveau, comp5Container);
-//                        System.out.println("case 5: " + "compID: " + competanceID + " compID: " + compID);
-//                        break;
-//                    }
-//                    case "6": {
-//                        comp6.setText(queryResult.getString("titreComp"));
-//                        createLevel(compID, competanceID, titreNiveau, comp6Container);
-//                        System.out.println("case 6: " + "compID: " + competanceID + " compID: " + compID);
-//                        break;
-//                    }
-//                    default:
-//                        System.out.println("Unknown competence");
-//                }
-//            }
-//            statement.close();
-//            queryResult.close();
-//
-//        }catch (Exception e){
-////            e.printStackTrace();
-//            System.out.println(e.getMessage());
-////            e.getCause();
-//        }
-//    }
-//
-//    // For creating levels as buttons
-//    private void createLevel(String compID, String compeanceID, String btnText, HBox container){
-//        if (compID.equals(compeanceID)){
-//            Button b1 = new Button();
-//            b1.setText(btnText);
-//            container.getChildren().add(b1);
-//        }
-    }
-
     @Override
     public void handle(Event event) {
         // For competence 1
         if (event.getSource() == comp1Level1){
             System.out.println("comp1Level1 clicked");
-            insertCurrentLevel(1, 1);
+            insertCurrentLevel(sessionApp,1, 1);
 
         }else if (event.getSource() == comp1Level2){
             System.out.println("comp1Level2 clicked");
-            insertCurrentLevel(2, 1);
+            insertCurrentLevel(sessionApp, 1,2);
 
         }else if (event.getSource() == comp1Level3){
             System.out.println("comp1Level3 clicked");
-            insertCurrentLevel(3, 1);
+            insertCurrentLevel(sessionApp, 1, 3);
+
 
         }
 
         // For competence 2
         else if (event.getSource() == comp2Level1){
             System.out.println("comp2Level1 clicked");
-            insertCurrentLevel(1, 2);
+            insertCurrentLevel(sessionApp, 2,1);
 
         }else if (event.getSource() == comp2Level2){
             System.out.println("comp2Level2 clicked");
-            insertCurrentLevel(2, 2);
+            insertCurrentLevel(sessionApp, 2,2);
 
         }else if (event.getSource() == comp2Level3){
             System.out.println("comp2Level3 clicked");
-            insertCurrentLevel(3, 2);
+            insertCurrentLevel(sessionApp, 2,3);
 
         }
 
         // For competence 3
         else if (event.getSource() == comp3Level1){
             System.out.println("comp3Level1 clicked");
-            insertCurrentLevel(1, 3);
+            insertCurrentLevel(sessionApp, 3,1);
 
         }else if (event.getSource() == comp3Level2){
             System.out.println("comp3Level2 clicked");
-            insertCurrentLevel(2, 3);
+            insertCurrentLevel(sessionApp, 3,2);
 
         }else if (event.getSource() == comp3Level3){
             System.out.println("comp3Level3 clicked");
-            insertCurrentLevel(3, 3);
+            insertCurrentLevel(sessionApp, 3, 3);
 
         }
 
         // For competence 4
         else if (event.getSource() == comp4Level1){
             System.out.println("comp4Level1 clicked");
-            insertCurrentLevel(1, 4);
+            insertCurrentLevel(sessionApp, 4, 1);
 
         }else if (event.getSource() == comp4Level2){
             System.out.println("comp4Level2 clicked");
-            insertCurrentLevel(2, 4);
+            insertCurrentLevel(sessionApp, 4,2);
+
 
         }else if (event.getSource() == comp4Level3){
             System.out.println("comp4Level3 clicked");
-            insertCurrentLevel(3, 4);
+            insertCurrentLevel(sessionApp, 4,3);
 
         }
 
         // For competence 5
         else if (event.getSource() == comp5Level1){
             System.out.println("comp5Level1 clicked");
-            insertCurrentLevel(1, 5);
+            insertCurrentLevel(sessionApp, 5,1);
 
         }else if (event.getSource() == comp5Level2){
             System.out.println("comp5Level2 clicked");
-            insertCurrentLevel(2, 5);
+            insertCurrentLevel(sessionApp, 5,2);
 
         }else if (event.getSource() == comp5Level3){
             System.out.println("comp5Level3 clicked");
-            insertCurrentLevel(3, 5);
+            insertCurrentLevel(sessionApp, 5,3);
 
         }
 
         // For competence 6
         else if (event.getSource() == comp6Level1){
             System.out.println("comp6Level1 clicked");
-            insertCurrentLevel(1, 6);
+            insertCurrentLevel(sessionApp, 6,1);
 
         }else if (event.getSource() == comp6Level2){
             System.out.println("comp6Level2 clicked");
-            insertCurrentLevel(2, 6);
+            insertCurrentLevel(sessionApp, 6, 2);
 
         }else if (event.getSource() == comp6Level3){
             System.out.println("comp6Level3 clicked");
-            insertCurrentLevel(3, 6);
+            insertCurrentLevel(sessionApp, 6,3);
 
         }
 

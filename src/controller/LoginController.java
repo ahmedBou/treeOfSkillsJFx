@@ -74,6 +74,7 @@ public class LoginController implements Initializable {
         Stage stage = (Stage) cancelButton.getScene().getWindow();
         stage.close();
     }
+
     public void toRegisterForm(){
         try{
             Parent root = FXMLLoader.load(getClass().getResource("/view/register.fxml"));
@@ -133,7 +134,7 @@ public class LoginController implements Initializable {
                     loginMessage.setText("success");
                     session = queryResult.getInt("idStaff");
                     System.out.println("session of Staff"+session);
-                    toRegisterForm();
+                    createStaffPage();
                     remplirListeApprenant();
 
                 }else{
@@ -153,6 +154,20 @@ public class LoginController implements Initializable {
         Stage registerStage = new Stage();
         registerStage.initStyle(StageStyle.UNDECORATED);
         registerStage.setScene(new Scene(root, 750, 400));
+        registerStage.show();
+
+        }catch (Exception e){
+            e.printStackTrace();
+            e.getCause();
+        }
+    }
+    public void createStaffPage(){
+        try{
+
+        Parent root = FXMLLoader.load(getClass().getResource("/view/staff.fxml"));
+        Stage registerStage = new Stage();
+        registerStage.initStyle(StageStyle.UNDECORATED);
+        registerStage.setScene(new Scene(root, 1520, 1095));
         registerStage.show();
 
         }catch (Exception e){
