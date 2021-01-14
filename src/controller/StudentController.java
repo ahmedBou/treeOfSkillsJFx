@@ -191,16 +191,21 @@ public class StudentController implements Initializable, EventHandler {
     @Override
     public void handle(Event event) {
         // For competence 1
+
+
         if (event.getSource() == comp1Level1){
             System.out.println("comp1Level1 clicked");
+            comp1Level1.setStyle("-fx-background-color:crimson");
             insertCurrentLevel(sessionApp,1, 1);
 
         }else if (event.getSource() == comp1Level2){
             System.out.println("comp1Level2 clicked");
+            comp1Level2.setStyle("-fx-background-color:crimson");
             insertCurrentLevel(sessionApp, 1,2);
 
         }else if (event.getSource() == comp1Level3){
             System.out.println("comp1Level3 clicked");
+            comp1Level3.setStyle("-fx-background-color:crimson");
             insertCurrentLevel(sessionApp, 1, 3);
 
 
@@ -209,14 +214,17 @@ public class StudentController implements Initializable, EventHandler {
         // For competence 2
         else if (event.getSource() == comp2Level1){
             System.out.println("comp2Level1 clicked");
+            comp2Level1.setStyle("-fx-background-color:crimson");
             insertCurrentLevel(sessionApp, 2,1);
 
         }else if (event.getSource() == comp2Level2){
             System.out.println("comp2Level2 clicked");
+            comp2Level2.setStyle("-fx-background-color:crimson");
             insertCurrentLevel(sessionApp, 2,2);
 
         }else if (event.getSource() == comp2Level3){
             System.out.println("comp2Level3 clicked");
+            comp2Level3.setStyle("-fx-background-color:crimson");
             insertCurrentLevel(sessionApp, 2,3);
 
         }
@@ -224,14 +232,17 @@ public class StudentController implements Initializable, EventHandler {
         // For competence 3
         else if (event.getSource() == comp3Level1){
             System.out.println("comp3Level1 clicked");
+            comp3Level1.setStyle("-fx-background-color:crimson");
             insertCurrentLevel(sessionApp, 3,1);
 
         }else if (event.getSource() == comp3Level2){
             System.out.println("comp3Level2 clicked");
+            comp3Level2.setStyle("-fx-background-color:crimson");
             insertCurrentLevel(sessionApp, 3,2);
 
         }else if (event.getSource() == comp3Level3){
             System.out.println("comp3Level3 clicked");
+            comp3Level3.setStyle("-fx-background-color:crimson");
             insertCurrentLevel(sessionApp, 3, 3);
 
         }
@@ -239,15 +250,18 @@ public class StudentController implements Initializable, EventHandler {
         // For competence 4
         else if (event.getSource() == comp4Level1){
             System.out.println("comp4Level1 clicked");
+            comp4Level1.setStyle("-fx-background-color:crimson");
             insertCurrentLevel(sessionApp, 4, 1);
 
         }else if (event.getSource() == comp4Level2){
             System.out.println("comp4Level2 clicked");
+            comp4Level2.setStyle("-fx-background-color:crimson");
             insertCurrentLevel(sessionApp, 4,2);
 
 
         }else if (event.getSource() == comp4Level3){
             System.out.println("comp4Level3 clicked");
+            comp4Level3.setStyle("-fx-background-color:crimson");
             insertCurrentLevel(sessionApp, 4,3);
 
         }
@@ -255,14 +269,17 @@ public class StudentController implements Initializable, EventHandler {
         // For competence 5
         else if (event.getSource() == comp5Level1){
             System.out.println("comp5Level1 clicked");
+            comp5Level1.setStyle("-fx-background-color:crimson");
             insertCurrentLevel(sessionApp, 5,1);
 
         }else if (event.getSource() == comp5Level2){
             System.out.println("comp5Level2 clicked");
+            comp5Level2.setStyle("-fx-background-color:crimson");
             insertCurrentLevel(sessionApp, 5,2);
 
         }else if (event.getSource() == comp5Level3){
             System.out.println("comp5Level3 clicked");
+            comp5Level3.setStyle("-fx-background-color:crimson");
             insertCurrentLevel(sessionApp, 5,3);
 
         }
@@ -270,14 +287,17 @@ public class StudentController implements Initializable, EventHandler {
         // For competence 6
         else if (event.getSource() == comp6Level1){
             System.out.println("comp6Level1 clicked");
+            comp6Level1.setStyle("-fx-background-color:crimson");
             insertCurrentLevel(sessionApp, 6,1);
 
         }else if (event.getSource() == comp6Level2){
             System.out.println("comp6Level2 clicked");
+            comp6Level2.setStyle("-fx-background-color:crimson");
             insertCurrentLevel(sessionApp, 6, 2);
 
         }else if (event.getSource() == comp6Level3){
             System.out.println("comp6Level3 clicked");
+            comp6Level3.setStyle("-fx-background-color:crimson");
             insertCurrentLevel(sessionApp, 6,3);
 
         }
